@@ -36,6 +36,16 @@ namespace simulatedAnnealing {
 		_temperature = x;
 	}
 
+	void SetUpParams::increment_nb_independent_runs()
+	{
+		++_nb_independent_runs;
+	}
+
+	void SetUpParams::increment_nb_evolution_steps()
+	{
+		++_nb_evolution_steps;
+	}
+
 
 
 	ostream & operator<<(ostream & os, const SetUpParams & setup)

@@ -35,6 +35,9 @@ namespace simulatedAnnealing {
 		void update_temperature(const double& x) ;
 		void setup_temperature(const double& x);
 
+		void increment_nb_independent_runs();
+		void increment_nb_evolution_steps();
+
 		bool is_less__max_independent_runs()const;
 		bool is_less_max_evolution_steps()const;
 
