@@ -44,10 +44,10 @@
     <ClCompile Include="Problem.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="SetUpParam.cpp">
+    <ClCompile Include="Solution.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Solution.cpp">
+    <ClCompile Include="SetUpParams.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

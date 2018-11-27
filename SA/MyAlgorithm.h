@@ -5,15 +5,22 @@
 #include<iostream>
 
 namespace simulatedAnnealing {
+	
+
 
 	using namespace std;
   class MyAlgorithm
   {
 	private:
-		vector<Solution*> _solutions;     // individuals in population
-		vector<struct particle> _fitness_values;
+		//vector<Solution*> _solutions;     // individuals in population
+		//vector<struct particle> _fitness_values;
+		
+		//unsigned int _upper_cost,_lower_cost; // lower and upper fitness of individuals in population
+
 		const SetUpParams& _setup;
-		unsigned int _upper_cost,_lower_cost; // lower and upper fitness of individuals in population
+		Problem _problem;
+		Solution _current_solution;
+		Solution _best_solution;
 
 	public:
 		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
@@ -22,6 +29,7 @@ namespace simulatedAnnealing {
 		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
 		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);
 		MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
+
 		const SetUpParams& setup() const;
 	  	void initialize();
 
@@ -32,7 +40,7 @@ namespace simulatedAnnealing {
 		unsigned int upper_cost() const;
 		unsigned int lower_cost() const;
 		Solution& solution(const unsigned int index) const;
-                vector<struct particle>&  fitness_values();
+        vector<struct particle>&  fitness_values();
 		double fitness(const unsigned int index) const;
 
 

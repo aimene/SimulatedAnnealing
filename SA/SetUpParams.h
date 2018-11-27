@@ -38,7 +38,6 @@ namespace simulatedAnnealing {
 		bool is_less__max_independent_runs()const;
 		bool is_less_max_evolution_steps()const;
 
-		const unsigned int   solution_size() const;
 
 
 		~SetUpParams();

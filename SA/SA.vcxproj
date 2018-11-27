@@ -167,7 +167,7 @@
     </ClCompile>
     <ClCompile Include="Problem.cpp" />
     <ClCompile Include="SA.cpp" />
-    <ClCompile Include="SetUpParam.cpp" />
+    <ClCompile Include="SetUpParams.cpp" />
     <ClCompile Include="Solution.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
