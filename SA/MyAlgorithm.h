@@ -22,6 +22,11 @@ namespace simulatedAnnealing {
 		Solution _current_solution;
 		Solution _best_solution;
 
+		unsigned int _nb_independent_runs;
+		unsigned int _nb_evolution_steps;
+
+		double _temperature;
+
 	public:
 		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
 		~MyAlgorithm();
@@ -31,7 +36,29 @@ namespace simulatedAnnealing {
 		MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
 
 		const SetUpParams& setup() const;
-	  	void initialize();
+
+		void setupTemperature(const double temp);
+
+		void updateTemperature();
+
+	  	bool stopCondition();
+
+		void updateSolution(Solution sol);
+
+		void increment();
+
+		const unsigned int   nb_independent_runs() const;
+		const unsigned int   nb_evolution_steps() const;
+
+		void update_temperature(const double& x);
+		void setup_temperature(const double& x);
+
+		void increment_nb_independent_runs();
+		void increment_nb_evolution_steps();
+
+		bool is_less__max_independent_runs()const;
+		bool is_less_max_evolution_steps()const;
+
 
 		// creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
         void evaluate();
