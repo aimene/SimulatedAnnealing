@@ -37,11 +37,9 @@ namespace simulatedAnnealing {
 
 		const SetUpParams& setup() const;
 
-		void setupTemperature(const double temp);
 
-		void updateTemperature();
 
-	  	bool stopCondition();
+	  	bool stop_condition();
 
 		void updateSolution(Solution sol);
 
@@ -59,6 +57,7 @@ namespace simulatedAnnealing {
 		bool is_less__max_independent_runs()const;
 		bool is_less_max_evolution_steps()const;
 
+		void solve();
 
 		// creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
         void evaluate();

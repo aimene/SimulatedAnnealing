@@ -70,4 +70,9 @@ namespace simulatedAnnealing {
 		return _nb_evolution_steps>=_setup.max_evolution_steps;
 	}
 
+	void MyAlgorithm::solve()
+	{
+
+	}
+
 }

@@ -9,6 +9,10 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include"Solution.h"
+#include"Problem.h"
+#include"MyAlgorithm.h"
+#include"SetUpParams.h"
 // TODO: Ajoutez les en-têtes à précompiler ici
 
 #endif //PCH_H
