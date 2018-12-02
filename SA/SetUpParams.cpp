@@ -2,7 +2,7 @@
 #include "SetUpParams.h"
 namespace simulatedAnnealing {
 
-	simulatedAnnealing::SetUpParams::SetUpParams() {}
+	
 
 	const unsigned int SetUpParams::max_independent_runs() const
 	{
@@ -13,6 +13,7 @@ namespace simulatedAnnealing {
 	{
 		return _max_evolution_steps;
 	}
+
 
 	
 

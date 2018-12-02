@@ -4,7 +4,13 @@ namespace simulatedAnnealing {
 
 
 	MyAlgorithm::MyAlgorithm(const Problem & pbm, const SetUpParams & setup) :
-		_problem { pbm }, _setup { setup }{}
+		_problem{ pbm }, _setup{ setup }, _current_solution{_problem}
+	,_best_solution{_problem}, _nb_independent_runs{}, _nb_evolution_steps{}
+	{}
+
+	MyAlgorithm::~MyAlgorithm()
+	{
+	}
 
 	const SetUpParams & MyAlgorithm::setup() const
 	{
@@ -19,8 +25,25 @@ namespace simulatedAnnealing {
 
 	void MyAlgorithm::updateSolution(Solution sol)
 	{
-		_current_solution = sol;
+		double proba = 0.0;
+		if (sol.get_fitness() < _current_solution.get_fitness())
+		{
+			proba= exp(-1*(_current_solution.get_fitness()
+				- sol.get_fitness()) /
+				_current_solution.get_fitness() / 
+				_temperature) ;
+		}
+		if ((sol.get_fitness() > _current_solution.get_fitness())|| (rand()<proba))
+		{
+			_current_solution = sol;
+			if (sol.get_fitness() > _best_solution.get_fitness())
+			{
+				_best_solution = sol;
+				_nb_evolution_steps = 0;
+			}
+		}
 	}
+		
 
 	void MyAlgorithm::increment()
 	{

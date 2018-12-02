@@ -4,6 +4,9 @@
 #include<vector>
 #include<iostream>
 
+#include <cstdlib>
+using namespace std;
+
 namespace simulatedAnnealing {
 	
 
@@ -39,6 +42,7 @@ namespace simulatedAnnealing {
 
 
 
+
 	  	bool stop_condition();
 
 		void updateSolution(Solution sol);
@@ -56,6 +60,8 @@ namespace simulatedAnnealing {
 
 		bool is_less__max_independent_runs()const;
 		bool is_less_max_evolution_steps()const;
+
+		
 
 		void solve();
 

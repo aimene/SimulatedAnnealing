@@ -18,7 +18,7 @@ namespace simulatedAnnealing {
 		//unsigned int   _solution_size;	        // size of each particle
 
 	public:
-		SetUpParams ();
+		
 
  		friend ostream& operator<< (ostream& os, const SetUpParams& setup);
 		friend istream& operator>> (istream& is, SetUpParams& setup);
@@ -26,7 +26,6 @@ namespace simulatedAnnealing {
 		const unsigned int   max_independent_runs() const;
 		const unsigned int   max_evolution_steps() const;
 
-		
 
 
 

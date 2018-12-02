@@ -1,5 +1,8 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
+#include <cmath>
+#define M_PI 3.14159265358979323846
+#define alpha 418.9829
 
 
 
@@ -28,10 +31,15 @@ namespace simulatedAnnealing {
 		void initialize();
 
 		double fitness();
-		
 
+		double rastrigin();
+		double ackley();
+		double resenbrock();
+		double schaffer();
+		double schwefel();
+		double weierstrass();
 		//unsigned int size() const;
-
+		double random(double min, double max) const;
 		double get_fitness() const;
 		const Problem& get_problem() const;
 	    const vector<double>& get_solution() const ;
