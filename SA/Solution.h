@@ -2,7 +2,7 @@
 #define SOLUTION_H
 #include <cmath>
 #define M_PI 3.14159265358979323846
-#define alpha 418.9829
+#define alphaa 418.9829
 
 
 

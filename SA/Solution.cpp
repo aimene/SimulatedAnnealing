@@ -19,7 +19,7 @@ namespace simulatedAnnealing
 
 	double Solution::random(double min, double max) const
 	{
-		return rand()/(double)RAND_MAX)*(max-min)+min;
+		return rand()/(double)(RAND_MAX)*(max-min)+min;
 	}
 
 	// getters
