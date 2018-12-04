@@ -6,34 +6,35 @@
 #include<iostream>
 #include<vector>
 
-#include"Solution.h"
+
 
 namespace simulatedAnnealing {
 	using namespace std;
-	 class Solution;
+
+	
      class Problem
   {
 	public:
-		Problem(const int& problem_id);
+		Problem( int problem_id);
 		~Problem();
+
+		const vector<Solution*> neighborhood(Solution current_solution) const;
+		 Solution* random_solution() const;
+		 Solution* best_solution(vector<Solution*> solutions)const;
+
+		// getters
+		int get_problem_id()const;
+		int get_size_solution()const;
+		int get_dimension() const;
+
 
 		friend ostream& operator<< (ostream& os, const Problem& pbm);
 		friend istream& operator>> (istream& is, Problem& pbm);
-
 		Problem& operator=  (const Problem& pbm);
 		bool operator== (const Problem& pbm) const;
 		bool operator!= (const Problem& pbm) const;
 
-		const vector<Solution*> neighborhood(Solution current_solution) const;
-		const Solution& random_solution() const;
-		const Solution& best_solution(vector<Solution*> solutions)const;
 
-		int get_problem_id()const;
-
-		int get_size_solution()const;
-
-		///Direction direction () const; //Maximize or Minimize
-		int get_dimension() const;
 		double LowerLimit, UpperLimit;
 
 		const static int rastrigin = 1;

@@ -1,9 +1,13 @@
+
+
+#include "pch.h"
 #include"Problem.h"
-#include"Solution.h"
+
 
 namespace simulatedAnnealing {
-	Problem::Problem(const int & problem_id): _problem_id{problem_id}
+	Problem::Problem( int  problem_id): _problem_id{problem_id}
 	{
+		
 		switch (get_problem_id())
 		{
 		case Problem::rastrigin: LowerLimit = -5.12; UpperLimit = 5.12; _size_solution = 20; break;
@@ -19,6 +23,7 @@ namespace simulatedAnnealing {
 
 	Problem::~Problem()
 	{
+		
 	
 	}
 
@@ -53,32 +58,32 @@ namespace simulatedAnnealing {
 		return  sols;
 	}
 
-	const Solution & Problem::random_solution() const
+	Solution * Problem::random_solution() const
 	{
-		Solution s{ *this };
-		s.initialize();
-		s.fitness();
-		return s;
+		Solution *randomsolution = new Solution{ *this };
+		randomsolution->initialize();
+		randomsolution->fitness();
+		return randomsolution;
 	}
 
-	const Solution & Problem::best_solution(vector<Solution*> solutions) const
+	 Solution * Problem::best_solution(vector<Solution*> solutions) const
 	{
-		Solution s= random_solution();
+		Solution* bestsolution= random_solution();
 		for (Solution* ss : solutions)
 		{
-			if (s.get_fitness() > ss->get_fitness())
-				s = *ss;
+			if (bestsolution->get_fitness() > ss->get_fitness())
+				bestsolution = ss;
 		}
-		return s;
+		return bestsolution;
 	}
 
 	Problem & Problem::operator=(const Problem & pbm)
 	{
-		if ( *this != pbm) {
+		if ( this->get_problem_id() != pbm.get_problem_id()) {
 		_problem_id = pbm.get_problem_id();
 		_size_solution = pbm.get_size_solution();
 		}
-	
+		return *this;
 	}
 	
 	bool Problem::operator!=(const Problem & pbm) const
@@ -95,8 +100,9 @@ namespace simulatedAnnealing {
 	}
 	ostream & operator<<(ostream & os, const Problem & pbm)
 	{
-		os << " PROBLEM :" << endl;
-		os << " function :" << endl;
+		os << "=====================================PROBLEM---BEGIN==================================" << endl;
+
+		os << " function : " ;
 		switch (pbm.get_problem_id())
 		{
 		case Problem::rastrigin: 
@@ -110,8 +116,9 @@ namespace simulatedAnnealing {
 		default:
 			break;
 		}
-		os << " dimension :" <<pbm.get_dimension() << endl;
-
+		os << " dimension : " <<pbm.get_dimension() << endl;
+		os << "=====================================PROBLEM---END==================================" << endl;
+		return os;
 
 	}
 
@@ -129,6 +136,9 @@ namespace simulatedAnnealing {
 		is >> problem_id;
 		if (is.good())
 			pbm = Problem{problem_id};
+
+		return is;
+
 	}
 
 }

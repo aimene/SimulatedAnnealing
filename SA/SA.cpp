@@ -3,10 +3,26 @@
 
 #include "pch.h"
 #include <iostream>
+#include<ctime>
+#include"MyAlgorithm.h"
+#include"Solution.h"
+#include"Problem.h"
+#include"SetUpParams.h"
+
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	srand(time(NULL));
+	simulatedAnnealing::SetUpParams setup{};
+	simulatedAnnealing::Problem problem{1};
+
+	cout << " id prblem " << problem.get_problem_id();
+	simulatedAnnealing::Solution solution{ problem };
+	simulatedAnnealing::MyAlgorithm myalgo{problem,setup};
+
+	myalgo.solve();
+
+    std::cout << " best solution =" <<myalgo.get_best_solution(); 
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

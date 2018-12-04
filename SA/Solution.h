@@ -11,26 +11,19 @@
 namespace simulatedAnnealing {
 	using namespace std;
 	class Problem;
+
     class Solution
   {
+		
 	//contient la déclaration d'une solution
 	public:
+
 		Solution (const Problem& pbm);
 		Solution (const Solution& sol);
 		~Solution();
 
- 		friend ostream& operator<< (ostream& os, const Solution& sol);
-		friend istream& operator>> (istream& is, Solution& sol);
-
-		
-
-		Solution& operator=  (const Solution& sol);
-		bool operator== (const Solution& sol) const;
-		bool operator!= (const Solution& sol) const;
-
 		void initialize();
-
-		double fitness();
+		void fitness();
 
 		double rastrigin();
 		double ackley();
@@ -38,13 +31,22 @@ namespace simulatedAnnealing {
 		double schaffer();
 		double schwefel();
 		double weierstrass();
+
 		//unsigned int size() const;
-		double random(double min, double max) const;
+		
+
 		double get_fitness() const;
 		const Problem& get_problem() const;
 	    const vector<double>& get_solution() const ;
 
+		double random(double min, double max) const;
 
+
+		friend ostream& operator<< (ostream& os, const Solution& sol);
+		friend istream& operator>> (istream& is, Solution& sol);
+		Solution& operator=  (const Solution& sol);
+		bool operator== (const Solution& sol) const;
+		bool operator!= (const Solution& sol) const;
 
 		//double& position(const int index); //retournera une position du tableau _solution
        // void  position(const int index, const double value);

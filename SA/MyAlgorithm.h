@@ -1,3 +1,6 @@
+#ifndef MYALGORITHM_H
+#define MYALGORITHM_H
+
 #include"Problem.h"
 #include"SetUpParams.h"
 #include"Solution.h"
@@ -34,14 +37,8 @@ namespace simulatedAnnealing {
 		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
 		~MyAlgorithm();
 
-		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
-		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);
-		MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
 
-		const SetUpParams& setup() const;
-
-
-
+	
 
 	  	bool stop_condition();
 
@@ -49,6 +46,7 @@ namespace simulatedAnnealing {
 
 		void increment();
 
+		const SetUpParams& setup() const;
 		const unsigned int   nb_independent_runs() const;
 		const unsigned int   nb_evolution_steps() const;
 
@@ -61,12 +59,18 @@ namespace simulatedAnnealing {
 		bool is_less__max_independent_runs()const;
 		bool is_less_max_evolution_steps()const;
 
-		
+		Solution get_best_solution() const;
 
 		void solve();
 
+
+
+		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
+		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);
+		MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
+
 		// creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
-        void evaluate();
+       /* void evaluate();
 
 	 	const vector<Solution*>& solutions() const;
 		unsigned int upper_cost() const;
@@ -85,3 +89,4 @@ namespace simulatedAnnealing {
 
   };
 }
+#endif

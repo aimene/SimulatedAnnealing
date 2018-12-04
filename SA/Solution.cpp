@@ -1,11 +1,19 @@
+#include "pch.h"
 #include"Solution.h"
 #include"Problem.h"
 
+#include<algorithm>
 namespace simulatedAnnealing
  {
 
 	// constructors
-	Solution::Solution(const Problem & pbm) : _problem{ pbm } {}
+
+	
+
+	Solution::Solution(const Problem & pbm) : _problem{ pbm } {
+		initialize();
+		fitness();
+	}
 
 	Solution::Solution(const Solution & sol): _problem{sol.get_problem()}
 	{
@@ -19,7 +27,10 @@ namespace simulatedAnnealing
 
 	double Solution::random(double min, double max) const
 	{
-		return rand()/(double)(RAND_MAX)*(max-min)+min;
+		//srand(time(NULL));
+		double f = (double)rand() / RAND_MAX;
+		return min + f *(max - min);
+	
 	}
 
 	// getters
@@ -66,10 +77,16 @@ namespace simulatedAnnealing
 	{
 		switch (_problem.get_problem_id())
 		{
-		case Problem::rastrigin: for (int i = 0; i < _problem.get_size_solution(); i++)
+		case Problem::rastrigin: 
+				
+			_solution.clear();
+			for (int i = 0; i < _problem.get_size_solution(); i++)
 				{
-			_solution.push_back(random(_problem.LowerLimit, _problem.UpperLimit));
+				double x1 = random(-1, 1);
+			
+				_solution.push_back(x1);		
 				}
+				
 				   ; break;
 		case Problem::ackley:; break;
 		case Problem::resenbrock:; break;
@@ -81,12 +98,12 @@ namespace simulatedAnnealing
 		}
 	}
 
-	double Solution::fitness()
+	void Solution::fitness()
 	{
-		double fitness;
-		switch (_problem.get_problem_id)
+		
+		switch (_problem.get_problem_id())
 		{
-		case Problem::rastrigin: fitness =rastrigin(); break;
+		case Problem::rastrigin: _current_fitness= rastrigin(); break;
 		case Problem::ackley:; break;
 		case Problem::resenbrock:; break;
 		case Problem::schaffer:; break;
@@ -95,13 +112,12 @@ namespace simulatedAnnealing
 		default:
 			break;
 		}
-		return fitness ;
+	
 	}
 
 	double Solution::rastrigin()
 	{
 	
-		
 		double top = 0;
 		for ( int j = 0; j < _solution.size(); j++)
 		{
@@ -113,22 +129,25 @@ namespace simulatedAnnealing
 
 	ostream & operator<<(ostream & os, const Solution & sol)
 	{
+		os << "=============================================================================" << endl;
 		os << "Values of solution :" << endl;
 		os << " ( ";
 		for (double x : sol.get_solution()) {
 			os << x << " , ";
 		}
 		os << " ) " << endl;
-		os << "Current fitness :" << endl;
+		os << "Current fitness :"  ;
 		os << sol.get_fitness() << endl;
 
-		os << sol.get_problem << endl;
-
+		os << sol.get_problem() << endl;
+		os << "=============================================================================" << endl;
+		return os;
 	}
 	istream & operator>>(istream & is, Solution & sol)
 	{
 		vector<double> _solution;
 		
+		return is;
 
 	}
 }

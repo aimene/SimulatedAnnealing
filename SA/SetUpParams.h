@@ -1,4 +1,8 @@
 
+#ifndef SETUPPARAMS_H
+#define SETUPPARAMS_H
+
+
 #include<istream>
 #include<ostream>
 
@@ -9,6 +13,7 @@ namespace simulatedAnnealing {
   	//ici vous devez mettre quelques paramètres tels que :
 
 	private:
+
 		static const unsigned int   _max_independent_runs = 2000000;         //number of independent runs
 		static const unsigned int   _max_evolution_steps = 30 ;       // number of iterations per run
 
@@ -34,3 +39,4 @@ namespace simulatedAnnealing {
 		~SetUpParams();
   };
 }
+#endif // !SETUPPARAMS_H

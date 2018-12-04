@@ -14,6 +14,10 @@ namespace simulatedAnnealing {
 		return _max_evolution_steps;
 	}
 
+	SetUpParams::~SetUpParams()
+	{
+	}
+
 
 	
 
@@ -23,11 +27,12 @@ namespace simulatedAnnealing {
 		os << "Number of max independet runs" << setup.max_independent_runs() << endl;
 		os << "Number of max evolution runs" << setup.max_evolution_steps() << endl;
 	
-
+		return os;
 	}
 	istream& operator>> (istream& is, SetUpParams& setup)
 	{		
 	
+		return is;
 	}
 
 
