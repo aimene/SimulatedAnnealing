@@ -32,6 +32,7 @@ namespace simulatedAnnealing {
 		unsigned int _nb_evolution_steps;
 
 		double _temperature;
+		double _min_temperature;
 
 	public:
 		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);

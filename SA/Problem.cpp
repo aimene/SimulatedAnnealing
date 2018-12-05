@@ -47,10 +47,14 @@ namespace simulatedAnnealing {
 	const vector<Solution*> Problem::neighborhood(Solution current_solution) const
 	{
 		vector<Solution*> sols;
-		for (int i = 0; i < 10; i++)
+		sols.clear();
+		for (int i = 0; i < 1000; i++)
 		{
+		
 			Solution* s = new Solution{ *this };
-			sols.push_back(s);
+
+			if (current_solution.get_fitness() > s->get_fitness())
+					sols.push_back(s);
 			
 		}
 

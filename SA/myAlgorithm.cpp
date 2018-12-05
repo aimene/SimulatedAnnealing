@@ -87,70 +87,79 @@ namespace simulatedAnnealing {
 	
 		_best_solution = _current_solution;
 
-		cout << "best_solution.get_fitness() = "<<_best_solution.get_fitness() << endl;
-		setup_temperature(100000000000000);
+		cout << "best_solution.get_fitness() before while = "<<_best_solution.get_fitness() << endl;
+		setup_temperature(1000);
 
-		while (!stop_condition(	))
+		while (!is_less__max_independent_runs())
 		{
+
+			
+			//std::cout << "=====================================solve- while--BEGIN==================================" << endl;
 			vector <Solution*> solutions = _problem.neighborhood(_current_solution);
 			Solution* bestSolution = _problem.best_solution(solutions);
 
 			//Solution* bestSolution = _problem.random_solution();
 			updateSolution(*bestSolution);
+			_nb_evolution_steps = 0;
 			//cout << "_current_solution.get_fitness() =" << _current_solution.get_fitness() << ""<<endl;
 
+			increment_nb_independent_runs();
+		//	cout << "=====best_solution.get_fitness() pn loop=" << _best_solution.get_fitness() << "" <<endl;
+			setup_temperature(1000);
 			
-			increment();
-			update_temperature(0.5);
+			//std::cout << "=====================================solve- while--end==================================" << endl;
 		}
 
-		cout << "best_solution.get_fitness() =" << _best_solution.get_fitness() << "";
+		cout << "best_solution.get_fitness() after=" << _best_solution.get_fitness() << "" << endl;
 
 	}
 
 	void MyAlgorithm::updateSolution(Solution sol)
 	{
-		std::cout << "=====================================updateSolution---BEGIN==================================" << endl;
+		//std::cout << "=====================================updateSolution---BEGIN==================================" << endl;
 
-		double proba = 0.0;
-
-		cout << "sol.get_fitness() > _current_solution.get_fitness() ==" << (sol.get_fitness() < _current_solution.get_fitness()) << endl;
-		if (sol.get_fitness() > _current_solution.get_fitness())
+		if (sol.get_fitness() < _current_solution.get_fitness())
 		{
-			proba = exp(-1 * (_current_solution.get_fitness()
-				- sol.get_fitness()) /
-			//	_current_solution.get_fitness() /
-				_temperature);
-
-			
+			_current_solution = sol;
 		}
-		else {
+		double proba = 0.0;
+		while (!is_less_max_evolution_steps())
+		{
 
-			double random = _current_solution.random(0, 1000);
-			cout << "proba  : " << proba << endl;
-			cout << "random :  " << random << endl;
+		//	cout<<"_temperature " << _temperature << endl;
 
-			if ((sol.get_fitness() < _current_solution.get_fitness()) || (random < proba))
+			if (_temperature < 0) break;
+
+			//cout << "sol.get_fitness() > _current_solution.get_fitness() ==" << (sol.get_fitness() < _current_solution.get_fitness()) << endl;
+			if (sol.get_fitness() > _current_solution.get_fitness())
 			{
-				_current_solution = sol;
-
-
-				cout << "(sol.get_fitness() < _best_solution.get_fitness()) =" << (sol.get_fitness() < _best_solution.get_fitness()) << endl;
-				if (sol.get_fitness() < _best_solution.get_fitness())
-				{
-
-					cout << "solution amélioré" << endl;
-					_best_solution = sol;
-					_nb_evolution_steps = 0;
-
-				}
+				proba = exp(-1 * (_current_solution.get_fitness()
+					- sol.get_fitness()) /
+					//	_current_solution.get_fitness() /
+					_temperature);
 
 			}
+			
 
+			double random =_current_solution.random(0, RAND_MAX);
+			//cout << "proba  : " << proba << endl;
+			//cout << "random :  " << random << endl;
+
+			if (random < proba)
+			{
+				_current_solution = sol;										
+			}
+			if (_current_solution.get_fitness() < _best_solution.get_fitness())
+			{			
+				_best_solution = _current_solution;			
+			}
+			
+			sol = *_problem.random_solution();
+
+			update_temperature(0.8);
+			increment_nb_evolution_steps();
 		}
-		
-		
-		cout << "=====================================updateSolution---END==================================" << endl;
+		//cout << "=====================================updateSolution---END==================================" << endl;
 	}
 
 }
