@@ -14,8 +14,8 @@ namespace simulatedAnnealing {
 
 	private:
 
-		static const unsigned int   _max_independent_runs = 2000;         //number of independent runs
-		static const unsigned int   _max_evolution_steps = 30 ;       // number of iterations per run
+		static const unsigned int   _max_independent_runs = 1;         //number of independent runs
+		static const unsigned int   _max_evolution_steps = 2000000 ;       // number of iterations per run
 
 	
 		
