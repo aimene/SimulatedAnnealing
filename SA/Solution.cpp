@@ -82,7 +82,7 @@ namespace simulatedAnnealing
 			_solution.clear();
 			for (int i = 0; i < _problem.get_size_solution(); i++)
 				{
-				double x1 = random(-1, 1);
+				double x1 = random(_problem.LowerLimit, _problem.UpperLimit);
 			
 				_solution.push_back(x1);		
 				}

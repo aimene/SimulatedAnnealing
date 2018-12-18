@@ -16,7 +16,7 @@ int main()
 	simulatedAnnealing::SetUpParams setup{};
 	simulatedAnnealing::Problem problem{1};
 
-	cout << " id prblem " << problem.get_problem_id();
+	cout << " id prblem " << problem.get_problem_id()<< endl;
 	simulatedAnnealing::Solution solution{ problem };
 	simulatedAnnealing::MyAlgorithm myalgo{problem,setup};
 

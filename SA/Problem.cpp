@@ -48,13 +48,16 @@ namespace simulatedAnnealing {
 	{
 		vector<Solution*> sols;
 		sols.clear();
-		for (int i = 0; i < 1000; i++)
+		while (sols.size()<10)
 		{
 		
 			Solution* s = new Solution{ *this };
 
 			if (current_solution.get_fitness() > s->get_fitness())
 					sols.push_back(s);
+			
+			if (current_solution.get_fitness() <= s->get_fitness())
+				delete s;
 			
 		}
 
@@ -63,14 +66,15 @@ namespace simulatedAnnealing {
 	}
 
 	Solution * Problem::random_solution() const
-	{
-		Solution *randomsolution = new Solution{ *this };
+	{		
+		Solution *randomsolution =  new Solution{ *this };		
 		randomsolution->initialize();
 		randomsolution->fitness();
 		return randomsolution;
 	}
 
-	 Solution * Problem::best_solution(vector<Solution*> solutions) const
+
+	Solution * Problem::best_solution(vector<Solution*> solutions) const
 	{
 		Solution* bestsolution= random_solution();
 		for (Solution* ss : solutions)
@@ -78,7 +82,17 @@ namespace simulatedAnnealing {
 			if (bestsolution->get_fitness() > ss->get_fitness())
 				bestsolution = ss;
 		}
+
+		for (Solution *ss : solutions)
+		{
+			if (ss!=bestsolution)
+			{
+				delete ss;
+			}
+		}
 		return bestsolution;
+
+		
 	}
 
 	Problem & Problem::operator=(const Problem & pbm)
@@ -102,6 +116,8 @@ namespace simulatedAnnealing {
 	{
 		return !(*this != pbm);
 	}
+
+
 	ostream & operator<<(ostream & os, const Problem & pbm)
 	{
 		os << "=====================================PROBLEM---BEGIN==================================" << endl;
