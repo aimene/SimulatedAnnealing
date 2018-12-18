@@ -18,7 +18,7 @@ namespace simulatedAnnealing {
 		Problem( int problem_id);
 		~Problem();
 
-		const vector<Solution*> neighborhood(Solution current_solution) const;
+		const vector<Solution*> neighborhood(Solution& current_solution) const;
 		 Solution* random_solution() const;
 		 Solution* best_solution(vector<Solution*> solutions)const;
 

@@ -152,8 +152,8 @@ namespace simulatedAnnealing {
 				_best_solution = _current_solution;			
 			}
 			
-			sol = *_problem.random_solution();
-			vector<Solution*> sols = _problem.neighborhood(sol);
+			//sol = *_problem.random_solution();
+			vector<Solution*> sols = _problem.neighborhood(_current_solution);
 			sol =* _problem.best_solution(sols);
 
 			update_temperature(0.95);

@@ -75,12 +75,15 @@ namespace simulatedAnnealing
 
 	void Solution::initialize()
 	{
+		_solution.clear();
+		int r = _problem.get_size_solution();
 		switch (_problem.get_problem_id())
 		{
 		case Problem::rastrigin: 
 				
-			_solution.clear();
-			for (int i = 0; i < _problem.get_size_solution(); i++)
+		
+			
+			for (int i = 0; i <r; i++)
 				{
 				double x1 = random(_problem.LowerLimit, _problem.UpperLimit);
 			

@@ -44,19 +44,23 @@ namespace simulatedAnnealing {
 		return _dimension;
 	}
 
-	const vector<Solution*> Problem::neighborhood(Solution current_solution) const
+	const vector<Solution*> Problem::neighborhood(Solution& current_solution) const
 	{
 		vector<Solution*> sols;
+		double currentFitness, random;
 		sols.clear();
 		while (sols.size()<10)
 		{
 		
-			Solution* s = new Solution{ *this };
+			 Solution* s = random_solution();
+			 currentFitness = current_solution.get_fitness();
+			 random = s->get_fitness();
 
-			if (current_solution.get_fitness() > s->get_fitness())
+
+			if (currentFitness >random)
 					sols.push_back(s);
 			
-			if (current_solution.get_fitness() <= s->get_fitness())
+			if (currentFitness <= random)
 				delete s;
 			
 		}
@@ -77,9 +81,12 @@ namespace simulatedAnnealing {
 	Solution * Problem::best_solution(vector<Solution*> solutions) const
 	{
 		Solution* bestsolution= random_solution();
+		double bestSolution , sss;
 		for (Solution* ss : solutions)
 		{
-			if (bestsolution->get_fitness() > ss->get_fitness())
+			bestSolution = bestsolution->get_fitness();
+			sss = ss->get_fitness();
+			if (bestSolution > sss)
 				bestsolution = ss;
 		}
 
