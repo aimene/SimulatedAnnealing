@@ -18,10 +18,14 @@ namespace simulatedAnnealing {
 		Problem( int problem_id);
 		~Problem();
 
-		const vector<Solution*> neighborhood(Solution& current_solution) const;
-		 Solution* random_solution() const;
-		 Solution* best_solution(vector<Solution*> solutions)const;
+		const vector<Solution*> neighborhood(Solution& current_solution) ;
+		 Solution* random_solution(const Solution& current) ;
+		 Solution* best_solution(vector<Solution*> solutions);
 
+		 //random 
+
+		 double random_sign();
+		 double random_01();
 		// getters
 		int get_problem_id()const;
 		int get_size_solution()const;

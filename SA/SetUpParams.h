@@ -14,8 +14,8 @@ namespace simulatedAnnealing {
 
 	private:
 
-		static const unsigned int   _max_independent_runs = 1;         //number of independent runs
-		static const unsigned int   _max_evolution_steps = 2000000 ;       // number of iterations per run
+		 const unsigned int   _max_independent_runs ;         //number of independent runs
+		 const unsigned int   _max_evolution_steps  ;       // number of iterations per run
 
 	
 		
@@ -24,7 +24,7 @@ namespace simulatedAnnealing {
 
 	public:
 		
-
+		SetUpParams(unsigned int   _max_independent_runs, unsigned int   _max_evolution_steps);
  		friend ostream& operator<< (ostream& os, const SetUpParams& setup);
 		friend istream& operator>> (istream& is, SetUpParams& setup);
 

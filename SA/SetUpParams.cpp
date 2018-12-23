@@ -4,6 +4,11 @@ namespace simulatedAnnealing {
 
 	
 
+	SetUpParams::SetUpParams(unsigned int   _max_independent_runs, unsigned int   _max_evolution_steps):
+		_max_evolution_steps{_max_evolution_steps}, _max_independent_runs{ _max_independent_runs }
+	{
+	}
+
 	const unsigned int SetUpParams::max_independent_runs() const
 	{
 		return _max_independent_runs;

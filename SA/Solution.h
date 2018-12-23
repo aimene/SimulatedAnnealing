@@ -39,6 +39,10 @@ namespace simulatedAnnealing {
 		const Problem& get_problem() const;
 	    const vector<double>& get_solution() const ;
 
+		void set_solution(int i , double value) ;
+
+
+
 		double random(double min, double max) const;
 
 

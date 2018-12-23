@@ -44,7 +44,62 @@ namespace simulatedAnnealing {
 		return _dimension;
 	}
 
-	const vector<Solution*> Problem::neighborhood(Solution& current_solution) const
+	double Problem::random_sign()
+	{
+		double value = 2 * random_01() - 1;
+
+		//assert(value >= -1 && value <= 1);
+
+		return value;
+	}
+
+	double Problem::random_01()
+	{
+		const double kMaxPlusOne = (double)RAND_MAX + 1;
+		double value = (double)rand() / kMaxPlusOne;
+
+		//assert( ((double) RAND_MAX / kMaxPlusOne) < 1);
+
+		//assert(value >= 0 && value < 1);
+
+		return value;
+	}
+
+	Solution * Problem::random_solution(const Solution& current) 
+	{
+		Solution *randomsolution = new Solution{ current };
+		double r, probability;
+		switch (randomsolution->get_problem().get_problem_id())
+		{
+		case rastrigin: // pour Rastrigin
+			r = 0.05;
+			probability = 0.7;
+			break;
+
+		default: r = 0.0015; probability = 0.5; break;
+		}
+		double value;
+		
+		double upper = current.get_problem().UpperLimit;
+		double lower = current.get_problem().LowerLimit;
+		for (int i = 0; i <randomsolution->get_problem().get_dimension(); i++)
+		{
+			if (randomsolution->random(0,1)<probability)
+			{
+				value = current.get_solution()[i] + random_01()*r*random_sign()*(upper - lower);
+				randomsolution->set_solution(i,value);
+			}
+			if (randomsolution->get_solution()[i]< lower || randomsolution->get_solution()[i]>upper)
+			{
+				value = randomsolution->random(lower, upper);
+				randomsolution->set_solution(i, value);
+			}
+		}
+	
+		return randomsolution;
+	}
+
+	const vector<Solution*> Problem::neighborhood(Solution& current_solution) 
 	{
 		vector<Solution*> sols;
 		double currentFitness, random;
@@ -52,7 +107,7 @@ namespace simulatedAnnealing {
 		while (sols.size()<10)
 		{
 		
-			 Solution* s = random_solution();
+			 Solution* s = random_solution(current_solution);
 			 currentFitness = current_solution.get_fitness();
 			 random = s->get_fitness();
 
@@ -69,18 +124,12 @@ namespace simulatedAnnealing {
 		return  sols;
 	}
 
-	Solution * Problem::random_solution() const
-	{		
-		Solution *randomsolution =  new Solution{ *this };		
-		randomsolution->initialize();
-		randomsolution->fitness();
-		return randomsolution;
-	}
+	
 
 
-	Solution * Problem::best_solution(vector<Solution*> solutions) const
+	Solution * Problem::best_solution(vector<Solution*> solutions) 
 	{
-		Solution* bestsolution= random_solution();
+		Solution* bestsolution= random_solution(*solutions[0]);
 		double bestSolution , sss;
 		for (Solution* ss : solutions)
 		{

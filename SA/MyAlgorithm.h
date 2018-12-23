@@ -43,7 +43,7 @@ namespace simulatedAnnealing {
 
 	  	bool stop_condition();
 
-		void updateSolution(Solution sol);
+		void updateSolution(Solution* sol);
 
 		void increment();
 
@@ -64,7 +64,7 @@ namespace simulatedAnnealing {
 
 		void solve();
 
-
+		void run();
 
 		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
 		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);

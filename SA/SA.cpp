@@ -13,14 +13,16 @@
 int main()
 {
 	srand(time(NULL));
-	simulatedAnnealing::SetUpParams setup{};
+
+	simulatedAnnealing::SetUpParams setup{30,20000};
 	simulatedAnnealing::Problem problem{1};
-
-	cout << " id prblem " << problem.get_problem_id()<< endl;
 	simulatedAnnealing::Solution solution{ problem };
-	simulatedAnnealing::MyAlgorithm myalgo{problem,setup};
+	simulatedAnnealing::MyAlgorithm myalgo{ problem,setup };
 
-	myalgo.solve();
+
+	myalgo.run();
+
+
 
     std::cout << " best solution =" <<myalgo.get_best_solution(); 
 }

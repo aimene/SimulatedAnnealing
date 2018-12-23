@@ -49,6 +49,11 @@ namespace simulatedAnnealing
 		return _solution;
 	}
 
+	void Solution::set_solution(int i, double value)
+	{
+		_solution[i] = value;
+	}
+
 	// override  operator
 	Solution & Solution::operator=(const Solution & sol)
 	{
