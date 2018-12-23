@@ -83,7 +83,7 @@ namespace simulatedAnnealing {
 	void MyAlgorithm::solve()
 
 	{
-		std::cout << "=================random =====================" << endl;
+		std::cout << "================= run( "<<nb_independent_runs() <<")=====================" << endl;
 		
 
 		if (_best_solution.get_fitness() >= _current_solution.get_fitness())
@@ -94,7 +94,7 @@ namespace simulatedAnnealing {
 		
 
 		cout << "best_solution.get_fitness() before while = "<<_best_solution.get_fitness() << endl;
-		setup_temperature(10000000);
+		setup_temperature(10000);
 
 		
 			
@@ -176,7 +176,7 @@ namespace simulatedAnnealing {
 			//vector<Solution*> sols = _problem.neighborhood(_current_solution);
 			//sol =* _problem.best_solution(sols);
 			sol->fitness();
-			update_temperature(0.95);
+			update_temperature(0.9999);
 			increment_nb_evolution_steps();
 		}
 		//cout << "=====================================updateSolution---END==================================" << endl;

@@ -72,8 +72,8 @@ namespace simulatedAnnealing {
 		switch (randomsolution->get_problem().get_problem_id())
 		{
 		case rastrigin: // pour Rastrigin
-			r = 0.05;
-			probability = 0.7;
+			r = 0.1	; // r= 0.1
+			probability = 0.12; // p = 0.15
 			break;
 
 		default: r = 0.0015; probability = 0.5; break;
@@ -86,7 +86,7 @@ namespace simulatedAnnealing {
 		{
 			if (randomsolution->random(0,1)<probability)
 			{
-				value = current.get_solution()[i] + random_01()*r*random_sign()*(upper - lower);
+				value = current.get_solution()[i] +r*random_sign()*(upper - lower);
 				randomsolution->set_solution(i,value);
 			}
 			if (randomsolution->get_solution()[i]< lower || randomsolution->get_solution()[i]>upper)
