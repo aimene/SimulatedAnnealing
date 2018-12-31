@@ -1,7 +1,7 @@
 #include "pch.h"
 #include"Solution.h"
 #include"Problem.h"
-
+#include <math.h>
 #include<algorithm>
 namespace simulatedAnnealing
  {
@@ -54,6 +54,123 @@ namespace simulatedAnnealing
 		_solution[i] = value;
 	}
 
+
+	void Solution::initialize()
+	{
+		_solution.clear();
+			 	
+			for (int i = 0; i < _problem.get_size_solution(); i++)
+				{
+				double x1 = random(_problem.LowerLimit, _problem.UpperLimit);
+			
+				_solution.push_back(x1);		
+				}							
+	}
+
+	void Solution::fitness()
+	{
+		
+		switch (_problem.get_problem_id())
+		{
+		case Problem::rastrigin: _current_fitness= rastrigin(); break;
+		case Problem::ackley: _current_fitness = ackley(); break;
+		case Problem::rosenbrock: _current_fitness = rosenbrock(); break;
+		case Problem::schaffer:_current_fitness = schaffer(); break;
+		case Problem::schwefel:_current_fitness = schwefel(); break;
+		case Problem::weierstrass:_current_fitness = weierstrass(); break;
+		default:
+			break;
+		}
+	
+	}
+
+	double Solution::rastrigin()
+	{
+	
+		double top = 0;
+		for ( int j = 0; j < _solution.size(); j++)
+		{
+			top = top + (pow(_solution[j], (double)2) - 10 * cos(2 * M_PI*_solution[j]) + 10);
+		}
+		return top;
+	}
+
+	double Solution::ackley()
+	{
+		 double a = 20.0;
+		double b = 0.2;
+		 double c = 2 * M_PI;
+
+		double sum1 = 0.0, sum2 = 0.0;
+		for (int i = 0; i < get_solution().size(); i++) {
+			sum1 = sum1+sqrt(( double(1) / get_solution().size())* (get_solution()[i] * get_solution()[i]));
+			sum2 = sum2+(double(1) / get_solution().size())*std::cos(c*get_solution()[i]);
+		}
+		return (-a*exp(-b*sum1) - exp(sum2) + b + exp(1));
+
+
+	
+	}
+
+	double Solution::rosenbrock()
+	{
+		const double ALPHA = 100.0;
+		double sum = 0.0;
+		for (int i = 0; i < _solution.size() - 1; i++)
+		{
+			double temp1 = _solution[i + 1] - (_solution[i] * _solution[i]) ;
+			double temp2 = _solution[i] - double(1.0);
+			sum += (ALPHA * temp1 * temp1) + (temp2 * temp2);
+		}
+		return sum;
+	}
+
+	double Solution::schaffer()
+	{
+		const double A = 0.5;
+		const double B = 0.001;
+		double sum = 0.0;
+		for (int i = 0; i < _solution.size()-1; ++i)
+			sum += A + (double(pow(sin(pow(_solution[i], 2) - pow(_solution[i + 1], 2)), 2) - A) / pow(1 + B*(pow(_solution[i], 2) + pow(_solution[i + 1], 2)), 2));
+		return sum;
+	}
+
+	double Solution::schwefel()
+	{
+		
+		const double alpha = 418.9829;
+		double sum = 0.0;
+		for (int i = 0; i < _solution.size(); ++i)
+		{
+			sum += _solution[i] * sin(sqrt(abs(_solution[i])));
+		}
+
+		return static_cast<int>(alpha*_solution.size() - sum); // min 420.9687
+	}
+
+	double Solution::weierstrass()
+	{
+		const double a = 0.5;
+		const double b = 3;
+		const double Kmax = 20;
+
+		double sum1 = 0.0;
+		for (int i = 0; i < _solution.size(); i++)
+		{
+			for (int k = 0; k <= Kmax; k++)
+			{
+				sum1 += pow(a, k) * cos(2.0*M_PI * pow(b, k) * (_solution[i] + a));
+			}
+		}
+
+		double sum2 = 0.0;
+		for (int k = 0; k <= Kmax; k++) {
+			sum2 += pow(a, k) * cos(2.0*M_PI * pow(b, k) * (a));
+		}
+		return (sum1 - sum2 * (_solution.size()));
+	}
+
+
 	// override  operator
 	Solution & Solution::operator=(const Solution & sol)
 	{
@@ -77,63 +194,6 @@ namespace simulatedAnnealing
 	{
 		return !(*this == sol);
 	}
-
-	void Solution::initialize()
-	{
-		_solution.clear();
-		int r = _problem.get_size_solution();
-		switch (_problem.get_problem_id())
-		{
-		case Problem::rastrigin: 
-				
-		
-			
-			for (int i = 0; i <r; i++)
-				{
-				double x1 = random(_problem.LowerLimit, _problem.UpperLimit);
-			
-				_solution.push_back(x1);		
-				}
-				
-				   ; break;
-		case Problem::ackley:; break;
-		case Problem::resenbrock:; break;
-		case Problem::schaffer: ; break;
-		case Problem::schwefel: ; break;
-		case Problem::weierstrass: ; break;
-		default:
-			break;
-		}
-	}
-
-	void Solution::fitness()
-	{
-		
-		switch (_problem.get_problem_id())
-		{
-		case Problem::rastrigin: _current_fitness= rastrigin(); break;
-		case Problem::ackley:; break;
-		case Problem::resenbrock:; break;
-		case Problem::schaffer:; break;
-		case Problem::schwefel:; break;
-		case Problem::weierstrass:; break;
-		default:
-			break;
-		}
-	
-	}
-
-	double Solution::rastrigin()
-	{
-	
-		double top = 0;
-		for ( int j = 0; j < _solution.size(); j++)
-		{
-			top = top + (pow(_solution[j], (double)2) - 10 * cos(2 * M_PI*_solution[j]) + 10);
-		}
-		return top;
-	}
-
 
 	ostream & operator<<(ostream & os, const Solution & sol)
 	{

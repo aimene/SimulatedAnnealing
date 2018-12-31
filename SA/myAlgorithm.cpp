@@ -98,21 +98,11 @@ namespace simulatedAnnealing {
 
 		
 			
-		//	vector <Solution*> solutions = _problem.neighborhood(_current_solution);
-		//	Solution* bestSolution = _problem.best_solution(solutions);
 
-			//Solution* bestSolution = _problem.random_solution();
 		   Solution* sol = new Solution{ _current_solution };
 			updateSolution(sol);
-			_nb_evolution_steps = 0;
-			//cout << "_current_solution.get_fitness() =" << _current_solution.get_fitness() << ""<<endl;
-
+		   _nb_evolution_steps = 0;
 			
-		//	cout << "=====best_solution.get_fitness() pn loop=" << _best_solution.get_fitness() << "" <<endl;
-			
-			
-			//std::cout << "=====================================solve- while--end==================================" << endl;
-		
 
 		cout << "best_solution.get_fitness() after=" << _best_solution.get_fitness() << "" << endl;
 

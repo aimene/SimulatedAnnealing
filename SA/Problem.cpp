@@ -7,12 +7,12 @@
 namespace simulatedAnnealing {
 	Problem::Problem( int  problem_id): _problem_id{problem_id}
 	{
-		
+		_size_solution = 20;
 		switch (get_problem_id())
 		{
-		case Problem::rastrigin: LowerLimit = -5.12; UpperLimit = 5.12; _size_solution = 20; break;
+		case Problem::rastrigin: LowerLimit = -5.12; UpperLimit = 5.12; break;
 		case Problem::ackley:LowerLimit = -5; UpperLimit =5 ; break;
-		case Problem::resenbrock:LowerLimit =0 ; UpperLimit =0 ; break;
+		case Problem::rosenbrock:LowerLimit =-INT_MAX; UpperLimit = INT_MAX; break;
 		case Problem::schaffer: LowerLimit =-100 ; UpperLimit =100 ; break;
 		case Problem::schwefel:LowerLimit = -500; UpperLimit =500 ; break;
 		case Problem::weierstrass:LowerLimit = -0.5 ; UpperLimit = 0.5 ; break;
@@ -47,9 +47,6 @@ namespace simulatedAnnealing {
 	double Problem::random_sign()
 	{
 		double value = 2 * random_01() - 1;
-
-		//assert(value >= -1 && value <= 1);
-
 		return value;
 	}
 
@@ -57,11 +54,6 @@ namespace simulatedAnnealing {
 	{
 		const double kMaxPlusOne = (double)RAND_MAX + 1;
 		double value = (double)rand() / kMaxPlusOne;
-
-		//assert( ((double) RAND_MAX / kMaxPlusOne) < 1);
-
-		//assert(value >= 0 && value < 1);
-
 		return value;
 	}
 
@@ -72,8 +64,28 @@ namespace simulatedAnnealing {
 		switch (randomsolution->get_problem().get_problem_id())
 		{
 		case rastrigin: // pour Rastrigin
-			r = 0.1	; // r= 0.1
-			probability = 0.12; // p = 0.15
+			r = 0.1; // r= 0.1
+			probability = 0.15; // p = 0.15
+			break;
+		case ackley: 
+			r = 0.01; 
+			probability = 0.1; 
+			break;
+		case rosenbrock: 
+			r = 0.3; 
+			probability = 0.25; 
+			break;
+		case schaffer: 
+			r = 0.05; 
+			probability = 0.15; 
+			break;
+		case schwefel: 
+			r = 0.05; 
+			probability = 0.3; 
+			break;
+		case weierstrass: 
+			r = 0.025; 
+			probability = 0.09; // p = 0.15
 			break;
 
 		default: r = 0.0015; probability = 0.5; break;
@@ -86,7 +98,7 @@ namespace simulatedAnnealing {
 		{
 			if (randomsolution->random(0,1)<probability)
 			{
-				value = current.get_solution()[i] +r*random_sign()*(upper - lower);
+				value = current.get_solution()[i] + r*random_sign()*(upper - lower);
 				randomsolution->set_solution(i,value);
 			}
 			if (randomsolution->get_solution()[i]< lower || randomsolution->get_solution()[i]>upper)
@@ -94,62 +106,15 @@ namespace simulatedAnnealing {
 				value = randomsolution->random(lower, upper);
 				randomsolution->set_solution(i, value);
 			}
+			randomsolution->fitness();
 		}
 	
 		return randomsolution;
 	}
 
-	const vector<Solution*> Problem::neighborhood(Solution& current_solution) 
-	{
-		vector<Solution*> sols;
-		double currentFitness, random;
-		sols.clear();
-		while (sols.size()<10)
-		{
-		
-			 Solution* s = random_solution(current_solution);
-			 currentFitness = current_solution.get_fitness();
-			 random = s->get_fitness();
-
-
-			if (currentFitness >random)
-					sols.push_back(s);
-			
-			if (currentFitness <= random)
-				delete s;
-			
-		}
-
-		
-		return  sols;
-	}
-
 	
 
-
-	Solution * Problem::best_solution(vector<Solution*> solutions) 
-	{
-		Solution* bestsolution= random_solution(*solutions[0]);
-		double bestSolution , sss;
-		for (Solution* ss : solutions)
-		{
-			bestSolution = bestsolution->get_fitness();
-			sss = ss->get_fitness();
-			if (bestSolution > sss)
-				bestsolution = ss;
-		}
-
-		for (Solution *ss : solutions)
-		{
-			if (ss!=bestsolution)
-			{
-				delete ss;
-			}
-		}
-		return bestsolution;
-
-		
-	}
+	
 
 	Problem & Problem::operator=(const Problem & pbm)
 	{
@@ -185,7 +150,7 @@ namespace simulatedAnnealing {
 			os << "rastrigin";
 			; break;
 		case Problem::ackley:; break;
-		case Problem::resenbrock:; break;
+		case Problem::rosenbrock:; break;
 		case Problem::schaffer: ; break;
 		case Problem::schwefel:; break;
 		case Problem::weierstrass:; break;

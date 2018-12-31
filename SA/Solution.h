@@ -27,7 +27,7 @@ namespace simulatedAnnealing {
 
 		double rastrigin();
 		double ackley();
-		double resenbrock();
+		double rosenbrock();
 		double schaffer();
 		double schwefel();
 		double weierstrass();

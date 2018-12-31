@@ -18,9 +18,7 @@ namespace simulatedAnnealing {
 		Problem( int problem_id);
 		~Problem();
 
-		const vector<Solution*> neighborhood(Solution& current_solution) ;
 		 Solution* random_solution(const Solution& current) ;
-		 Solution* best_solution(vector<Solution*> solutions);
 
 		 //random 
 
@@ -43,7 +41,7 @@ namespace simulatedAnnealing {
 
 		const static int rastrigin = 1;
 		const static int ackley = 2;
-		const static int resenbrock = 3;
+		const static int rosenbrock = 3;
 		const static int schaffer = 4;
 		const static int schwefel = 5;
 		const static int weierstrass = 6;
