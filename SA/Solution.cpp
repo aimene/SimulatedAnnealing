@@ -84,63 +84,65 @@ namespace simulatedAnnealing
 	
 	}
 
+	// f(0,0,0,0,0,...) =0
 	double Solution::rastrigin()
 	{
 	
 		double top = 0;
-		for ( int j = 0; j < _solution.size(); j++)
+		for ( int j = 0; j < _problem.get_dimension(); j++)
 		{
 			top = top + (pow(_solution[j], (double)2) - 10 * cos(2 * M_PI*_solution[j]) + 10);
 		}
 		return top;
 	}
 
+	// f(0,0,0,0,0,...) =0
 	double Solution::ackley()
 	{
 		 double a = 20.0;
 		double b = 0.2;
 		 double c = 2 * M_PI;
-
-		double sum1 = 0.0, sum2 = 0.0;
-		for (int i = 0; i < get_solution().size(); i++) {
-			sum1 = sum1+sqrt(( double(1) / get_solution().size())* (get_solution()[i] * get_solution()[i]));
-			sum2 = sum2+(double(1) / get_solution().size())*std::cos(c*get_solution()[i]);
+		 double dimesntion = _problem.get_dimension();
+		 double sum1 = 0.0, sum2 = 0.0;
+		for (int i = 0; i < dimesntion; i++) {
+			sum1 += pow(_solution[i], 2);
+			sum2 += cos(c*get_solution()[i]);
 		}
-		return (-a*exp(-b*sum1) - exp(sum2) + b + exp(1));
+		return -a*exp(-b* sqrt((double(1) / dimesntion)*sum1)) - exp((double(1) / dimesntion)*sum2) + a + exp(1);
 
 
 	
 	}
-
+	// f(1,1,1,1,1,...) =0
 	double Solution::rosenbrock()
 	{
 		const double ALPHA = 100.0;
 		double sum = 0.0;
-		for (int i = 0; i < _solution.size() - 1; i++)
+		for (int i = 0; i < _problem.get_dimension() - 1; i++)
 		{
-			double temp1 = _solution[i + 1] - (_solution[i] * _solution[i]) ;
+			double temp1 =  _solution[i + 1] - pow(_solution[i], 2);
 			double temp2 = _solution[i] - double(1.0);
-			sum += (ALPHA * temp1 * temp1) + (temp2 * temp2);
+			sum += ALPHA *pow( temp1 ,2) + pow(temp2, 2);
 		}
 		return sum;
 	}
-
+	// f(0,0,0,0,0,...) =0
 	double Solution::schaffer()
 	{
 		const double A = 0.5;
 		const double B = 0.001;
 		double sum = 0.0;
-		for (int i = 0; i < _solution.size()-1; ++i)
+		for (int i = 0; i < _problem.get_dimension(); ++i)
 			sum += A + (double(pow(sin(pow(_solution[i], 2) - pow(_solution[i + 1], 2)), 2) - A) / pow(1 + B*(pow(_solution[i], 2) + pow(_solution[i + 1], 2)), 2));
 		return sum;
 	}
-
+	//f(420.9687,..........,420.9687 )=0
 	double Solution::schwefel()
 	{
 		
 		const double alpha = 418.9829;
 		double sum = 0.0;
-		for (int i = 0; i < _solution.size(); ++i)
+		for (int i = 0; i < _problem.get_dimension(); ++i)
 		{
 			sum += _solution[i] * sin(sqrt(abs(_solution[i])));
 		}
@@ -152,21 +154,20 @@ namespace simulatedAnnealing
 	{
 		const double a = 0.5;
 		const double b = 3;
-		const double Kmax = 20;
+		const double Kmax =20 ;
 
 		double sum1 = 0.0;
-		for (int i = 0; i < _solution.size(); i++)
+		double sum2 = 0.0;
+		for (int i = 0; i < _problem.get_dimension(); i++)
 		{
 			for (int k = 0; k <= Kmax; k++)
 			{
 				sum1 += pow(a, k) * cos(2.0*M_PI * pow(b, k) * (_solution[i] + a));
 			}
+			sum2 += pow(a, i) * cos(2.0*M_PI * pow(b, i) * (a));
 		}
 
-		double sum2 = 0.0;
-		for (int k = 0; k <= Kmax; k++) {
-			sum2 += pow(a, k) * cos(2.0*M_PI * pow(b, k) * (a));
-		}
+		
 		return (sum1 - sum2 * (_solution.size()));
 	}
 
@@ -198,16 +199,22 @@ namespace simulatedAnnealing
 	ostream & operator<<(ostream & os, const Solution & sol)
 	{
 		os << "=============================================================================" << endl;
+		os << "  " << endl;
+
+		os << sol.get_problem() << endl;
 		os << "Values of solution :" << endl;
 		os << " ( ";
 		for (double x : sol.get_solution()) {
 			os << x << " , ";
 		}
 		os << " ) " << endl;
+		os << "  " << endl;
+
 		os << "Current fitness :"  ;
 		os << sol.get_fitness() << endl;
+		os << "  " << endl;
 
-		os << sol.get_problem() << endl;
+	
 		os << "=============================================================================" << endl;
 		return os;
 	}

@@ -12,7 +12,7 @@ namespace simulatedAnnealing {
 		{
 		case Problem::rastrigin: LowerLimit = -5.12; UpperLimit = 5.12; break;
 		case Problem::ackley:LowerLimit = -5; UpperLimit =5 ; break;
-		case Problem::rosenbrock:LowerLimit =-INT_MAX; UpperLimit = INT_MAX; break;
+		case Problem::rosenbrock:LowerLimit =-2.048; UpperLimit = 2.048; break;
 		case Problem::schaffer: LowerLimit =-100 ; UpperLimit =100 ; break;
 		case Problem::schwefel:LowerLimit = -500; UpperLimit =500 ; break;
 		case Problem::weierstrass:LowerLimit = -0.5 ; UpperLimit = 0.5 ; break;
@@ -44,6 +44,7 @@ namespace simulatedAnnealing {
 		return _dimension;
 	}
 
+	// -1  1
 	double Problem::random_sign()
 	{
 		double value = 2 * random_01() - 1;
@@ -64,16 +65,17 @@ namespace simulatedAnnealing {
 		switch (randomsolution->get_problem().get_problem_id())
 		{
 		case rastrigin: // pour Rastrigin
-			r = 0.1; // r= 0.1
-			probability = 0.15; // p = 0.15
+			r = 0.9	; // 
+			probability = 0.03; // 
 			break;
+			// 30 * 20 000  r = 0.99 and p = 0.0015 ==> 0.022222
 		case ackley: 
-			r = 0.01; 
+			r = 0.5; 
 			probability = 0.1; 
 			break;
 		case rosenbrock: 
-			r = 0.3; 
-			probability = 0.25; 
+			r = 0.03; 
+			probability = 0.03; 
 			break;
 		case schaffer: 
 			r = 0.05; 
@@ -84,8 +86,8 @@ namespace simulatedAnnealing {
 			probability = 0.3; 
 			break;
 		case weierstrass: 
-			r = 0.025; 
-			probability = 0.09; // p = 0.15
+			r = 0.3; //0.3
+			probability = 0.2; // 0.1
 			break;
 
 		default: r = 0.0015; probability = 0.5; break;
@@ -98,7 +100,7 @@ namespace simulatedAnnealing {
 		{
 			if (randomsolution->random(0,1)<probability)
 			{
-				value = current.get_solution()[i] + r*random_sign()*(upper - lower);
+				value = current.get_solution()[i] +r*random_01()*random_sign()*(upper - lower);
 				randomsolution->set_solution(i,value);
 			}
 			if (randomsolution->get_solution()[i]< lower || randomsolution->get_solution()[i]>upper)
@@ -141,24 +143,24 @@ namespace simulatedAnnealing {
 
 	ostream & operator<<(ostream & os, const Problem & pbm)
 	{
-		os << "=====================================PROBLEM---BEGIN==================================" << endl;
 
-		os << " function : " ;
+		os << "function : "  ;
 		switch (pbm.get_problem_id())
 		{
 		case Problem::rastrigin: 
-			os << "rastrigin";
+			os <<"rastrigin" << endl;;
 			; break;
-		case Problem::ackley:; break;
-		case Problem::rosenbrock:; break;
-		case Problem::schaffer: ; break;
-		case Problem::schwefel:; break;
-		case Problem::weierstrass:; break;
+		case Problem::ackley:
+			os << "ackley"; break;
+		case Problem::rosenbrock:os << "rosenbrock" << endl;; break;
+		case Problem::schaffer: os << "schaffer" << endl;; break;
+		case Problem::schwefel:os << "schwefel" << endl;; break;
+		case Problem::weierstrass :os << "weierstrass" << endl;; break;
 		default:
 			break;
 		}
-		os << " dimension : " <<pbm.get_dimension() << endl;
-		os << "=====================================PROBLEM---END==================================" << endl;
+		os << "dimension : ";
+			os<< pbm.get_dimension() << endl;
 		return os;
 
 	}

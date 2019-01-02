@@ -23,19 +23,15 @@ namespace simulatedAnnealing {
 		
 		//unsigned int _upper_cost,_lower_cost; // lower and upper fitness of individuals in population
 
-		const SetUpParams& _setup;
+	    SetUpParams& _setup;
 		Problem _problem;
 		Solution _current_solution;
 		Solution _best_solution;
 
-		unsigned int _nb_independent_runs;
-		unsigned int _nb_evolution_steps;
-
-		double _temperature;
-		double _min_temperature;
+		
 
 	public:
-		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
+		MyAlgorithm(const Problem& pbm, SetUpParams& setup);
 		~MyAlgorithm();
 
 
@@ -45,20 +41,10 @@ namespace simulatedAnnealing {
 
 		void updateSolution(Solution* sol);
 
-		void increment();
+		
 
 		const SetUpParams& setup() const;
-		const unsigned int   nb_independent_runs() const;
-		const unsigned int   nb_evolution_steps() const;
-
-		void update_temperature(const double& x);
-		void setup_temperature(const double& x);
-
-		void increment_nb_independent_runs();
-		void increment_nb_evolution_steps();
-
-		bool is_less__max_independent_runs()const;
-		bool is_less_max_evolution_steps()const;
+		
 
 		Solution get_best_solution() const;
 
