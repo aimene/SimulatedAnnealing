@@ -65,17 +65,17 @@ namespace simulatedAnnealing {
 		switch (randomsolution->get_problem().get_problem_id())
 		{
 		case rastrigin: // pour Rastrigin
-			r = 0.9	; // 
-			probability = 0.03; // 
+			r = 0.14	; // 
+			probability = 0.015; // 
 			break;
-			// 30 * 20 000  r = 0.99 and p = 0.0015 ==> 0.022222
+			//  r = 0.14 and p = 0.0015 
 		case ackley: 
-			r = 0.5; 
-			probability = 0.1; 
+			r = 0.17; 
+			probability = 0.017; 
 			break;
 		case rosenbrock: 
-			r = 0.03; 
-			probability = 0.03; 
+			r = 0.35; 
+			probability = 0.015; 
 			break;
 		case schaffer: 
 			r = 0.05; 
