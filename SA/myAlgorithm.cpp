@@ -5,11 +5,10 @@ namespace simulatedAnnealing {
 
 
 	/**
-	* \brief	Construit un MyAlgorithm
-	* \details	Initialise les valeurs  : 	_problem{ pbm }, _setup{ setup }, _current_solution{_problem},_best_solution{_problem}
-	* \param    pbm \e Problem problème
-	* \param    setup \e SetUpParams setup
-	*/
+	 * \file       MyAlgorith.h
+	 * \author     Aimene AMIOUR
+	 * \brief      Classe représentant le noyau de l'algorithme
+	 */
 	MyAlgorithm::MyAlgorithm(const Problem & pbm,  SetUpParams & setup) :
 		_problem{ pbm }, _setup{ setup }, _current_solution{_problem}
 	,_best_solution{_problem}

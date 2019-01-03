@@ -19,9 +19,7 @@ namespace simulatedAnnealing {
 //=======================================================================
 /**
  * \file       MyAlgorith.h
- * \author     Preyankan Anandharoopan
- * \version    1.7
- * \date       13 Novembre 2015
+ * \author     Aimene AMIOUR
  * \brief      Classe représentant le noyau de l'algorithme
  */
   class MyAlgorithm
