@@ -74,8 +74,8 @@ namespace simulatedAnnealing {
 			probability = 0.017; 
 			break;
 		case rosenbrock: 
-			r = 0.35; 
-			probability = 0.015; 
+			r = 0.013; 
+			probability = 0.013; 
 			break;
 		case schaffer: 
 			r = 0.05; 

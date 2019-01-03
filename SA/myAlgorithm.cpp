@@ -52,7 +52,7 @@ namespace simulatedAnnealing {
 		}
 		cout << _best_solution << endl;
 
-		   _setup.setup_temperature(10000);
+		   _setup.setup_temperature();
 		    Solution* sol = new Solution{ _current_solution };
 			updateSolution(sol);
 			_setup.setup_nb_evolution_steps(0);
@@ -66,6 +66,7 @@ namespace simulatedAnnealing {
 	{
 		while (_setup.is_less__max_independent_runs())
 		{
+			
 			solve();
 			_setup.increment_nb_independent_runs();
 		}
@@ -103,14 +104,15 @@ namespace simulatedAnnealing {
 			{			
 				_best_solution = _current_solution;			
 			}
-				delete sol;
+				
 			
-			
+			delete sol;
+		
 			sol = _problem.random_solution(_current_solution);
 		
 			sol->fitness();
 
-			_setup.update_temperature(0.9999);
+			_setup.update_temperature();
 
 			_setup.increment_nb_evolution_steps();
 		}

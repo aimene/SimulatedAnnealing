@@ -4,8 +4,10 @@ namespace simulatedAnnealing {
 
 	
 
-	SetUpParams::SetUpParams( int   _max_independent_runs,  int   _max_evolution_steps):
-		_max_evolution_steps{_max_evolution_steps}, _max_independent_runs{ _max_independent_runs }
+	SetUpParams::SetUpParams( int   max_independent_runs,  int   max_evolution_steps, double initial_temperature, double coef_decrois):
+		_max_evolution_steps{max_evolution_steps}, _max_independent_runs{ max_independent_runs }
+		,_initial_temperature{ initial_temperature },_temperature{ initial_temperature },
+	    _coef_decrois_temperature{coef_decrois}
 	{
 		setup_nb_evolution_steps(1);
 		setup_nb_independent_runs (1);
@@ -26,6 +28,11 @@ namespace simulatedAnnealing {
 		return _temperature;
 	}
 
+	const double & SetUpParams::get_coef_decrois_temperature()
+	{
+		return _coef_decrois_temperature;
+	}
+
 
 
 	const  int& SetUpParams::get_nb_independent_runs() const
@@ -38,15 +45,15 @@ namespace simulatedAnnealing {
 		return _nb_evolution_steps;
 	}
 
-	void SetUpParams::update_temperature(const double & x)
+	void SetUpParams::update_temperature()
 	{
-		_temperature *= x;
+		_temperature *= _coef_decrois_temperature;
 
 	}
 
-	void SetUpParams::setup_temperature(const double & x)
+	void SetUpParams::setup_temperature()
 	{
-		_temperature = x;
+		_temperature = _initial_temperature;
 	}
 
 	void SetUpParams::setup_nb_evolution_steps(int x)
