@@ -39,53 +39,66 @@ namespace simulatedAnnealing {
 		return _best_solution;
 	}
 
-	void MyAlgorithm::solve()
-
-	{
-		std::cout << "================= run( "<<_setup.get_nb_independent_runs() <<" )=====================" << endl;
-		
-
-		if (_best_solution.get_fitness() >= _current_solution.get_fitness())
-		{
-			_best_solution = _current_solution;
-
-		}
-		cout << _best_solution << endl;
-
-		   _setup.setup_temperature();
-		    Solution* sol = new Solution{ _current_solution };
-			updateSolution(sol);
-			_setup.setup_nb_evolution_steps(0);
-			
-
-		cout << _best_solution << endl;
-
-	}
 
 	void MyAlgorithm::run()
 	{
+		_best_solution = _current_solution;
 		while (_setup.is_less__max_independent_runs())
 		{
-			
+
+			_setup.setup_temperature();
 			solve();
 			_setup.increment_nb_independent_runs();
 		}
 	}
 
+	void MyAlgorithm::solve()
+
+	{
+		std::cout << "================= run( "<<_setup.get_nb_independent_runs() <<" )=====================" << endl;
+		
+		std::cout << _best_solution << std::endl;
+	
+		
+
+		Solution* sol = new Solution{ _best_solution };
+
+		while (_setup.is_less_max_evolution_steps())
+		{
+		if (_setup.get_current_temperature() < 0) break;
+
+		updateSolution(sol);
+		
+		delete sol;
+
+		sol = _problem.random_solution(_current_solution);
+
+		sol->fitness();
+
+		_setup.update_temperature();
+		_setup.increment_nb_evolution_steps();
+
+		}
+		_setup.set_nb_evolution_steps(0);
+
+
+		std::cout << _best_solution << std::endl;
+
+	}
+
+	
+
 	void MyAlgorithm::updateSolution(Solution* sol)
 	{
 
 	
-		double proba = 0.0;
-		while (_setup.is_less_max_evolution_steps())
-		{
+	      	double proba = 0.0;
+	
 
-
-			if (_setup.get_temperature() < 0) break;
-
+			
 			if (sol->get_fitness() > _current_solution.get_fitness())
 			{
-				proba = exp(-1 * (_current_solution.get_fitness()- sol->get_fitness()) /_setup.get_temperature());
+				proba = exp(-1 * (_current_solution.get_fitness()- sol->get_fitness()) /_setup.get_current_temperature());
 
 			}
 			
@@ -95,7 +108,7 @@ namespace simulatedAnnealing {
 			{
 				_current_solution = *sol;										
 			}
-			if (_current_solution.get_fitness() >sol->get_fitness())
+			if (_current_solution.get_fitness() > sol->get_fitness())
 			{
 				  _current_solution=*sol;
 				 
@@ -106,16 +119,9 @@ namespace simulatedAnnealing {
 			}
 				
 			
-			delete sol;
 		
-			sol = _problem.random_solution(_current_solution);
+			
 		
-			sol->fitness();
-
-			_setup.update_temperature();
-
-			_setup.increment_nb_evolution_steps();
-		}
 		//cout << "=====================================updateSolution---END==================================" << endl;
 	}
 

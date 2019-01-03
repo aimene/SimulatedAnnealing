@@ -55,6 +55,13 @@ namespace simulatedAnnealing {
 		
 
 	public:
+
+		/**
+		 * \brief       constructeur par defaut de la classe setUpParams
+		 * \details     Initialise les variables de la classse.
+		 *
+		 */
+		SetUpParams();
 		/**
 		 * \brief       constructeur par defaut de la classe setUpParams
 		 * \details     Initialise les variables de la classse.
@@ -96,13 +103,22 @@ namespace simulatedAnnealing {
 		 * \brief      renvoie _temperature
 		 * \return    \e double _temperature
 		 */
-		const double& get_temperature();
+		const double& get_current_temperature() const;
+
+		/**
+		 * \brief      renvoie _initial_temperature
+		 * \return    \e double _initial_temperature
+		 */
+		const double& get_initial_temperature() const;
 
 		/**
 		 * \brief      renvoie _coef_decrois_temperature
 		 * \return    \e double _coef_decrois_temperature
 		 */
 		const double& get_coef_decrois_temperature();
+
+	
+
 
 		/**
 		* \brief      modifie la temperature en multipliant par _coef_decrois_temperature
@@ -115,20 +131,28 @@ namespace simulatedAnnealing {
 		void setup_temperature();
 
 		/**
+		* \brief      réinitialiser la temperature initialle par temp
+		* \param      temp \e int la nouvelle valeur du _initial_temperature
+		*/
+		void set_initial_temperature(double temp);
+
+		/**
 		* \brief      réinitialiser _nb_evolution_steps par x 
 		* \param      x \e int la nouvelle valeur du compteur _nb_evolution_steps
 		*/
-		void setup_nb_evolution_steps(int x);
+		void set_nb_evolution_steps(int x);
 
 		/**
 		* \brief      réinitialiser _nb_independent_runs par x
 		* \param      x \e int la nouvelle valeur du compteur _nb_independent_runs
 		*/
-		void setup_nb_independent_runs(int x);
+		void set_nb_independent_runs(int x);
 
+	
 		/**
 		* \brief     incrémente _nb_independent_runs de 1
 		*/
+
 		void increment_nb_independent_runs();
 
 		/**
@@ -174,9 +198,13 @@ namespace simulatedAnnealing {
 
 		
 
-
+		/**
+		* \brief      destructeur de la classe SetUpParams
+		*/
 
 		~SetUpParams();
+	
+		
   };
 }
 #endif // !SETUPPARAMS_H
