@@ -5,6 +5,22 @@
 
 
 namespace simulatedAnnealing {
+
+
+	//=======================================================================
+/**
+ * \file       Problem.cpp
+ * \author     Yanes SAID MENSOUR
+ * \brief      définition des méthodes de la class Problem de l'algorithme SA
+ */
+
+
+
+	 /**
+	 * \brief    Construit un problème
+	 * \details  Initialise les valeurs  : _size_solution, LowerLimit, UpperLimit
+	 * \param    problem_id         \e int l'identifiant du problem
+	 */
 	Problem::Problem( int  problem_id): _problem_id{problem_id}
 	{
 		_size_solution = 20;
@@ -21,36 +37,56 @@ namespace simulatedAnnealing {
 		}
 	}
 
+	/**
+	* \brief    Le destructeur du problème
+	*/
 	Problem::~Problem()
 	{
-		
-	
+			
 	}
 
-
-
-	int Problem::get_problem_id() const
+	/**
+	* \brief	renvoie une référence vers la valeur de l'identifiant du problem
+	* \return   Un \e int représentant une référence vers _id_problem
+	*/
+	const int& Problem::get_problem_id() const
 	{
 		return _problem_id;
 	}
 
-	int Problem::get_size_solution() const
+	/**
+	* \brief	renvoie une référence vers la valeur de la taille de la solution
+	* \return   Un \e int représentant une référence vers _size_solution
+	*/
+	const int& Problem::get_size_solution() const
 	{
 		return _size_solution;
 	}
 
-	int Problem::get_dimension() const
+	/**
+	* \brief	renvoie une référence vers la valeur de ladimension du problem
+	* \return   Un \e int représentant une référence vers _dimension
+	*/
+	const int& Problem::get_dimension() const
 	{
 		return _dimension;
 	}
 
-	// -1  1
+
+	/**
+	* \brief	renvoie un nombre réel  compris entre  [-1,1]
+	* \return   Un \e double
+	*/
 	double Problem::random_sign()
 	{
 		double value = 2 * random_01() - 1;
 		return value;
 	}
 
+	/**
+	* \brief	renvoie un nombre réel  compris entre  [0,1]
+	* \return   Un \e double
+	*/
 	double Problem::random_01()
 	{
 		const double kMaxPlusOne = (double)RAND_MAX + 1;
@@ -58,6 +94,14 @@ namespace simulatedAnnealing {
 		return value;
 	}
 
+
+	/**
+	* \brief	renvoie un pointeur vers une solution meilleur que la solution passé en paramètre
+	* \details  cette methode génère une solution plus optimale en rajoutant à chaque valeur de la solution passé en paramètre
+	*			(qui passe le teste de la probabilité avec succes) une petite valeur positive ou négative en fonction de la valeur retourné 
+	*			par random_sign()
+	* \return   Un \e Solution représentant un pointeur
+	*/
 	Solution * Problem::random_solution(const Solution& current) 
 	{
 		Solution *randomsolution = new Solution{ current };
@@ -116,8 +160,11 @@ namespace simulatedAnnealing {
 
 	
 
-	
-
+	/**
+	 * \brief       constructeur de recopie d'un problème
+	 * \param       pbm \e Problem problème
+	 * \return      Une référence de type \e Problem
+	 */
 	Problem & Problem::operator=(const Problem & pbm)
 	{
 		if ( this->get_problem_id() != pbm.get_problem_id()) {
@@ -127,6 +174,21 @@ namespace simulatedAnnealing {
 		return *this;
 	}
 	
+	/**
+	 * \brief       surcharge d'opérateur de comparaison == d'un problème
+	 * \param       pbm \e Problem problème
+	 * \return      \e bool
+	 */
+	bool Problem::operator==(const Problem & pbm) const
+	{
+		return !(*this != pbm);
+	}
+
+	/**
+	 * \brief       surcharge d'opérateur de comparaison != d'un problème
+	 * \param       pbm \e Problem problème
+	 * \return      \e bool
+	 */
 	bool Problem::operator!=(const Problem & pbm) const
 	{
 		if (_problem_id != pbm.get_problem_id())
@@ -134,24 +196,22 @@ namespace simulatedAnnealing {
 		else
 			return  true;
 	}
-	
-	bool Problem::operator==(const Problem & pbm) const
-	{
-		return !(*this != pbm);
-	}
 
-
+	/**
+	 * \brief    surcharge d'opérateurs <<
+	 * \details  permet d'afficher les variables à l'écran
+	 *
+	 * \param    os \e ostream flux de sortie
+	 * \param    pbm \e Problem problème
+	 */
 	ostream & operator<<(ostream & os, const Problem & pbm)
 	{
 
 		os << "function : "  ;
 		switch (pbm.get_problem_id())
 		{
-		case Problem::rastrigin: 
-			os <<"rastrigin" << endl;;
-			; break;
-		case Problem::ackley:
-			os << "ackley"; break;
+		case Problem::rastrigin: os <<"rastrigin" << endl;;; break;
+		case Problem::ackley: os << "ackley" <<endl; break;
 		case Problem::rosenbrock:os << "rosenbrock" << endl;; break;
 		case Problem::schaffer: os << "schaffer" << endl;; break;
 		case Problem::schwefel:os << "schwefel" << endl;; break;
@@ -159,12 +219,18 @@ namespace simulatedAnnealing {
 		default:
 			break;
 		}
-		os << "dimension : ";
-			os<< pbm.get_dimension() << endl;
+		os << "dimension : "<< pbm.get_dimension() << endl;
 		return os;
 
 	}
 
+	/**
+	 * \brief       Lit avec le format: problem_id
+	 * \details     permet d'entrer les valeurs numériques au clavier pour créer un problème
+	 *
+	 * \param       is \e istream flux d'entrée
+	 * \param       pbm \e Problem problème
+	 */
 	istream & operator>>(istream & is, Problem & pbm)
 	{
 		cout <<" Choose a function " <<endl;

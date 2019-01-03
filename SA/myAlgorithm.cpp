@@ -154,6 +154,7 @@ namespace simulatedAnnealing {
 		os << myAlgo.get_setup() << endl;
 		os << myAlgo.get_current_solution() << endl;
 		os << myAlgo.get_best_solution() << endl;
+		return os;
 	}
 
 }
