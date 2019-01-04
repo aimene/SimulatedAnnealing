@@ -16,11 +16,11 @@ namespace simulatedAnnealing {
 
 
 
-	 /**
-	 * \brief    Construit un problème
-	 * \details  Initialise les valeurs  : _size_solution, LowerLimit, UpperLimit
-	 * \param    problem_id         \e int l'identifiant du problem
-	 */
+	/**
+	* \brief    Construit un problème
+	* \details  Initialise les valeurs  : _size_solution, LowerLimit, UpperLimit
+	* \param    problem_id         \e int l'identifiant du problem
+	*/
 	Problem::Problem( int  problem_id): _problem_id{problem_id}
 	{
 		_size_solution = 20;
@@ -108,30 +108,29 @@ namespace simulatedAnnealing {
 		double r, probability;
 		switch (randomsolution->get_problem().get_problem_id())
 		{
-		case rastrigin: // pour Rastrigin
-			r = 0.14	; // 
+		case rastrigin: // pour Rastrigin : r = 0.14 and p = 0.0015 / temp 1000000  and coef 0.999999
+			r = 0.15; // 
 			probability = 0.015; // 
 			break;
-			//  r = 0.14 and p = 0.0015 
-		case ackley: 
-			r = 0.17; 
+		case ackley:  // pour ackely : r = 0.1 and p = 0.0017 / temp 1000000  and coef 0.999999
+			r = 0.1; 
 			probability = 0.017; 
 			break;
 		case rosenbrock: 
-			r = 0.013; 
-			probability = 0.013; 
+			r = 0.3; 
+			probability = 0.015; 
 			break;
-		case schaffer: 
-			r = 0.05; 
-			probability = 0.15; 
+		case schaffer:  // pour schaffer : r = 0.3 and p = 0.0025 / temp 1000000  and coef 0.999999
+			r = 0.3; 
+			probability = 0.025; 
 			break;
-		case schwefel: 
-			r = 0.05; 
-			probability = 0.3; 
+		case schwefel: // pour schwefel : r = 0.75 and p = 0.01 / temp 1000000  and coef 0.999999
+			r = 0.75; 
+			probability = 0.1; 
 			break;
-		case weierstrass: 
-			r = 0.3; //0.3
-			probability = 0.2; // 0.1
+		case weierstrass: // pour weierstrass : r = 0.3 and p = 0.1 / temp 1000000  and coef 0.999999
+			r = 0.3; //0.5
+			probability = 0.1; // 0.023
 			break;
 
 		default: r = 0.0015; probability = 0.5; break;

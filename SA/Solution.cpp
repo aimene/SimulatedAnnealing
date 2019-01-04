@@ -145,7 +145,7 @@ namespace simulatedAnnealing
 		double Solution::ackley()
 		{
 			 double a = 20.0;
-			double b = 0.2;
+			 double b = 0.2;
 			 double c = 2 * M_PI;
 			 double dimesntion = _problem.get_dimension();
 			 double sum1 = 0.0, sum2 = 0.0;
@@ -184,7 +184,7 @@ namespace simulatedAnnealing
 			const double A = 0.5;
 			const double B = 0.001;
 			double sum = 0.0;
-			for (int i = 0; i < _problem.get_dimension(); ++i)
+			for (int i = 0; i < _problem.get_dimension()-1; ++i)
 				sum += A + (double(pow(sin(pow(_solution[i], 2) - pow(_solution[i + 1], 2)), 2) - A) / pow(1 + B*(pow(_solution[i], 2) + pow(_solution[i + 1], 2)), 2));
 			return sum;
 		}
@@ -203,7 +203,7 @@ namespace simulatedAnnealing
 				sum += _solution[i] * sin(sqrt(abs(_solution[i])));
 			}
 
-			return static_cast<int>(alpha*_solution.size() - sum); // min 420.9687
+			return (alpha*_solution.size() - sum); // min 420.9687
 		}
 
 		/**
