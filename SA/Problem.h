@@ -15,7 +15,7 @@ namespace simulatedAnnealing {
 /**
  * \file       Problem.cpp
  * \author     Yanes SAID MENSOUR
- * \brief      définition des méthodes de la class Problem de l'algorithme SA
+ * \brief      définition des méthodes de la classe Problem de l'algorithme SA
  */
      class Problem
   {
@@ -24,7 +24,7 @@ namespace simulatedAnnealing {
 		/**
 		* \brief    Construit un problème
 		* \details  Initialise les valeurs  : _size_solution, LowerLimit, UpperLimit
-		* \param    problem_id         \e int l'identifiant du problem
+		* \param    problem_id         \e int l'identifiant du probleme
 		*/
 		Problem( int problem_id);
 
@@ -46,28 +46,28 @@ namespace simulatedAnnealing {
 		const int& get_size_solution()const;
 
 		/**
-		* \brief	renvoie une référence vers la valeur de ladimension du problem
+		* \brief	renvoie une référence vers la valeur de la dimension du problem
 		* \return   Un \e int représentant une référence vers _dimension
 		*/
 		const int& get_dimension() const;
 
 
 		/**
-		* \brief	renvoie un nombre réel  compris entre  [-1,1]
+		* \brief	renvoie un nombre réel  comprit entre  [-1,1]
 		* \return   Un \e double
 		*/
 		double random_sign();
 
 		/**
-		* \brief	renvoie un nombre réel  compris entre  [0,1]
+		* \brief	renvoie un nombre réel  comprit entre  [0,1]
 		* \return   Un \e double
 		*/
 		double random_01();
 
 		/**
-		* \brief	renvoie un pointeur vers une solution meilleur que la solution passé en paramètre
+		* \brief	renvoie un pointeur vers une solution meilleure que la solution passée en paramètre
 		* \details  cette methode génère une solution plus optimale en rajoutant à chaque valeur de la solution passé en paramètre
-		*			(qui passe le teste de la probabilité avec succes) une petite valeur positive ou négative en fonction de la valeur retourné
+		*			(qui passe le teste de la probabilité avec succès) une petite valeur positive ou négative en fonction de la valeur retournée
 		*			par random_sign()
 		* \return   Un \e Solution représentant un pointeur
 		*/
@@ -126,32 +126,32 @@ namespace simulatedAnnealing {
 		double UpperLimit;
 
 		/**
-		* \brief	l'identifiant de la fonction rastrigin
+		* \brief	l'identifiant de la fonction Rastrigin
 		*/
 		const static int rastrigin = 1;
 
 		/**
-		* \brief	l'identifiant de la fonction ackley
+		* \brief	l'identifiant de la fonction Ackley
 		*/
 		const static int ackley = 2;
 
 		/**
-		* \brief	l'identifiant de la fonction rosenbrock
+		* \brief	l'identifiant de la fonction Rosenbrock
 		*/
 		const static int rosenbrock = 3;
 
 		/**
-		* \brief	l'identifiant de la fonction schaffer
+		* \brief	l'identifiant de la fonction Schaffer
 		*/
 		const static int schaffer = 4;
 
 		/**
-		* \brief	l'identifiant de la fonction schwefel
+		* \brief	l'identifiant de la fonction Schwefel
 		*/
 		const static int schwefel = 5;
 
 		/**
-		* \brief	l'identifiant de la fonction weierstrass
+		* \brief	l'identifiant de la fonction Weierstrass
 		*/
 		const static int weierstrass = 6;
 

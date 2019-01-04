@@ -4,7 +4,7 @@ namespace simulatedAnnealing {
 	//=======================================================================
 	/**
 	 * \file       SetUpParams.h
-	 * \author     Imloul bilell
+	 * \author     Bilell IMLOUL
 	 * \brief      Réprésente les paramètres de l'application
 	 *
 	 * \details    Classe contenant tous les paramètres nécessaires pour le bon fonctionnement de l'algorithme SA.

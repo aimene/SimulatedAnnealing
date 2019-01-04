@@ -11,7 +11,12 @@
 namespace simulatedAnnealing {
 	using namespace std;
 	class Problem;
-
+	//=======================================================================
+/**
+ * \file       Solution.cpp
+ * \author     Oumar MAREGA
+ * \brief      définition des méthodes de la classe Solution de l'algorithme SA
+ */
     class Solution
   {
 		
@@ -79,37 +84,37 @@ namespace simulatedAnnealing {
 
 
 		/**
-		* \brief	renvoie la fitness de _solution pour rastrigin
+		* \brief	renvoie la fitness de _solution pour Rastrigin
 		* \return   Un \e  double 
 		*/
 		double rastrigin();
 
 		/**
-		* \brief	renvoie la fitness de _solution pour ackley
+		* \brief	renvoie la fitness de _solution pour Ackley
 		* \return   Un \e  double
 		*/
 		double ackley();
 
 		/**
-		* \brief	renvoie la fitness de _solution pour rosenbrock
+		* \brief	renvoie la fitness de _solution pour Rosenbrock
 		* \return   Un \e  double
 		*/
 		double rosenbrock();
 
 		/**
-		* \brief	renvoie la fitness de _solution pour schaffer
+		* \brief	renvoie la fitness de _solution pour Schaffer
 		* \return   Un \e  double
 		*/
 		double schaffer();
 
 		/**
-		* \brief	renvoie la fitness de _solution pour schwefel
+		* \brief	renvoie la fitness de _solution pour Schwefel
 		* \return   Un \e  double
 		*/
 		double schwefel();
 
 		/**
-		* \brief	renvoie la fitness de _solution pour weierstrass
+		* \brief	renvoie la fitness de _solution pour Weierstrass
 		* \return   Un \e  double
 		*/
 		double weierstrass();

@@ -34,8 +34,8 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief	renvoie une référence vers _best_solution qui contient la meilleur solution trouvé
-	* \return   Un \e Solution représentant une référence vers  _best_solution
+	* \brief	renvoie une référence vers _best_solution qui contient la meilleure solution trouvée
+	* \return   Une \e Solution représentant une référence vers  _best_solution
 	*/
 	const Solution& MyAlgorithm::get_best_solution() const
 	{
@@ -43,15 +43,15 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief	renvoie une référence vers _current_solution qui contient la solution  courante
-	* \return   Un \e Solution représentant une référence vers  _current_solution
+	* \brief	renvoie une référence vers _current_solution qui contient la solution courante
+	* \return   Une \e Solution représentant une référence vers  _current_solution
 	*/
 	const Solution & MyAlgorithm::get_current_solution() const
 	{
 		return _current_solution;
 	}
 	/**
-		* \brief	renvoie une référence vers _problem qui contient le problem à optimiser
+		* \brief	renvoie une référence vers _problem qui contient le probleme à optimiser
 		* \return   Un \e Problem représentant une référence vers  _problem
 	*/
 	const Problem & MyAlgorithm::get_problem() const
@@ -109,7 +109,7 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief  mis à jour la solution courante et la meilleure solution en fonction de la loi de metropolis
+	* \brief  met à jour la solution courante et la meilleure solution en fonction de la loi de Metropolis
 	*/
 	void MyAlgorithm::updateSolution(Solution* sol)
 	{

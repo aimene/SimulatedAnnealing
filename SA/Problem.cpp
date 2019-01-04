@@ -11,7 +11,7 @@ namespace simulatedAnnealing {
 /**
  * \file       Problem.cpp
  * \author     Yanes SAID MENSOUR
- * \brief      définition des méthodes de la class Problem de l'algorithme SA
+ * \brief      définition des méthodes de la classe Problem de l'algorithme SA
  */
 
 
@@ -46,7 +46,7 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief	renvoie une référence vers la valeur de l'identifiant du problem
+	* \brief	renvoie une référence vers la valeur de l'identifiant du problème
 	* \return   Un \e int représentant une référence vers _id_problem
 	*/
 	const int& Problem::get_problem_id() const
@@ -64,7 +64,7 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief	renvoie une référence vers la valeur de ladimension du problem
+	* \brief	renvoie une référence vers la valeur de la dimension du problème
 	* \return   Un \e int représentant une référence vers _dimension
 	*/
 	const int& Problem::get_dimension() const
@@ -74,7 +74,7 @@ namespace simulatedAnnealing {
 
 
 	/**
-	* \brief	renvoie un nombre réel  compris entre  [-1,1]
+	* \brief	renvoie un nombre réel  comprit entre  [-1,1]
 	* \return   Un \e double
 	*/
 	double Problem::random_sign()
@@ -84,7 +84,7 @@ namespace simulatedAnnealing {
 	}
 
 	/**
-	* \brief	renvoie un nombre réel  compris entre  [0,1]
+	* \brief	renvoie un nombre réel  comprit entre  [0,1]
 	* \return   Un \e double
 	*/
 	double Problem::random_01()
@@ -96,44 +96,44 @@ namespace simulatedAnnealing {
 
 
 	/**
-	* \brief	renvoie un pointeur vers une solution meilleur que la solution passé en paramètre
+	* \brief	renvoie un pointeur vers une solution meilleure que la solution passée en paramètre
 	* \details  cette methode génère une solution plus optimale en rajoutant à chaque valeur de la solution passé en paramètre
-	*			(qui passe le teste de la probabilité avec succes) une petite valeur positive ou négative en fonction de la valeur retourné 
+	*			(qui passe le teste de la probabilité avec succès) une petite valeur positive ou négative en fonction de la valeur retourné 
 	*			par random_sign()
 	* \return   Un \e Solution représentant un pointeur
 	*/
 	Solution * Problem::random_solution(const Solution& current) 
 	{
 		Solution *randomsolution = new Solution{ current };
-		double r, probability;
+		double minimiseur, probability;
 		switch (randomsolution->get_problem().get_problem_id())
 		{
 		case rastrigin: // pour Rastrigin : r = 0.14 and p = 0.0015 / temp 1000000  and coef 0.999999
-			r = 0.15; // 
+			minimiseur = 0.15; // 
 			probability = 0.015; // 
 			break;
-		case ackley:  // pour ackely : r = 0.1 and p = 0.0017 / temp 1000000  and coef 0.999999
-			r = 0.1; 
+		case ackley:  // pour Ackely : r = 0.1 and p = 0.0017 / temp 1000000  and coef 0.999999
+			minimiseur = 0.1;
 			probability = 0.017; 
 			break;
 		case rosenbrock: 
-			r = 0.3; 
+			minimiseur = 0.3;
 			probability = 0.015; 
 			break;
-		case schaffer:  // pour schaffer : r = 0.3 and p = 0.0025 / temp 1000000  and coef 0.999999
-			r = 0.3; 
+		case schaffer:  // pour Schaffer : r = 0.3 and p = 0.0025 / temp 1000000  and coef 0.999999
+			minimiseur = 0.3;
 			probability = 0.025; 
 			break;
-		case schwefel: // pour schwefel : r = 0.75 and p = 0.01 / temp 1000000  and coef 0.999999
-			r = 0.75; 
+		case schwefel: // pour Schwefel : r = 0.75 and p = 0.01 / temp 1000000  and coef 0.999999
+			minimiseur = 0.75;
 			probability = 0.1; 
 			break;
-		case weierstrass: // pour weierstrass : r = 0.3 and p = 0.1 / temp 1000000  and coef 0.999999
-			r = 0.3; //0.5
+		case weierstrass: // pour Weierstrass : r = 0.3 and p = 0.1 / temp 1000000  and coef 0.999999
+			minimiseur = 0.3; //0.5
 			probability = 0.1; // 0.023
 			break;
 
-		default: r = 0.0015; probability = 0.5; break;
+		default: minimiseur = 0.0015; probability = 0.5; break;
 		}
 		double value;
 		
@@ -143,7 +143,7 @@ namespace simulatedAnnealing {
 		{
 			if (randomsolution->random(0,1)<probability)
 			{
-				value = current.get_solution()[i] +r*random_01()*random_sign()*(upper - lower);
+				value = current.get_solution()[i] + minimiseur*random_01()*random_sign()*(upper - lower);
 				randomsolution->set_solution(i,value);
 			}
 			if (randomsolution->get_solution()[i]< lower || randomsolution->get_solution()[i]>upper)

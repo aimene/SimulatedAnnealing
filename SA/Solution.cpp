@@ -5,8 +5,13 @@
 #include<algorithm>
 namespace simulatedAnnealing
  {
-
-	// constructors
+	//=======================================================================
+/**
+ * \file       Solution.cpp
+ * \author     Oumar MAREGA
+ * \brief      définition des méthodes de la classe Solution de l'algorithme SA
+ */	
+ // constructors
 
 	
 		/**Construit une Solution à partir d'un problème
@@ -71,8 +76,8 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie le fitness
-		* \return	Un \e double le fitness de la solution
+		* \brief	renvoie la fitness
+		* \return	Un \e double de la fitness de la solution
 		*/
 		double Solution::get_fitness() const
 		{
@@ -99,8 +104,8 @@ namespace simulatedAnnealing
 
 		/**
 		* \brief      change la valeur de _solution en position i par value
-		* \param      i \e int la position de la valeur à changer
-		* \param      value \e double  la valeur de remplacement
+		* \param      i \e int la position de la valeure à changer
+		* \param      value \e double  la valeure de remplacement
 		*/
 		void Solution::set_solution(int i, double value)
 		{
@@ -122,7 +127,7 @@ namespace simulatedAnnealing
 
 
 		/**
-		* \brief	renvoie la fitness de _solution pour rastrigin
+		* \brief	renvoie la fitness de _solution pour Rastrigin
 		* \details    f(0,0,0,0,0,...) =0
 		* \return   Un \e  double
 		*/
@@ -138,7 +143,7 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie la fitness de _solution pour ackley
+		* \brief	renvoie la fitness de _solution pour Ackley
 		* \details  f(0,0,0,0,0,...) =0
 		* \return   Un \e  double
 		*/
@@ -157,7 +162,7 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie la fitness de _solution pour rosenbrock
+		* \brief	renvoie la fitness de _solution pour Rosenbrock
 		* \details  f(1,1,1,1,1,...) =0
 		* \return   Un \e  double
 		*/
@@ -175,7 +180,7 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie la fitness de _solution pour schaffer
+		* \brief	renvoie la fitness de _solution pour Schaffer
 		* \details  f(0,0,0,0,0,...) =0
 		* \return   Un \e  double
 		*/
@@ -190,7 +195,7 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie la fitness de _solution pour schwefel
+		* \brief	renvoie la fitness de _solution pour Schwefel
 		* \details  f(420.9687,..........,420.9687 )=0
 		* \return   Un \e  double
 		*/
@@ -207,7 +212,7 @@ namespace simulatedAnnealing
 		}
 
 		/**
-		* \brief	renvoie la fitness de _solution pour weierstrass
+		* \brief	renvoie la fitness de _solution pour Weierstrass
 		* \details    f(0,0,0,0,0,...) =0
 		* \return   Un \e  double
 		*/

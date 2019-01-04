@@ -15,8 +15,8 @@ int main()
 	srand(time(NULL));
 
 	
-	simulatedAnnealing::SetUpParams setup{30,200,1000000,0.999999};
-	simulatedAnnealing::Problem problem{6};
+	simulatedAnnealing::SetUpParams setup{30,20000,1000000,0.999999};
+	simulatedAnnealing::Problem problem{2};
 	simulatedAnnealing::MyAlgorithm myalgo{ problem,setup };
 
 

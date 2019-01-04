@@ -8,7 +8,7 @@
 
 /**
  * \file       SetUpParams.h
- * \author     Imloul bilell
+ * \author     Bilell IMLOUL
  * \brief      Réprésente les paramètres de l'application
  *
  * \details    Classe contenant tous les paramètres nécessaires pour le bon fonctionnement de l'algorithme SA.
@@ -21,11 +21,11 @@ namespace simulatedAnnealing {
 	private:
 
 		/**
-			 * \brief    le nombre maximale d'exécution indépendante  de l'algorithme
+			 * \brief    le nombre maximal d'exécution indépendante  de l'algorithme
 		 */
 		 const  int   _max_independent_runs ;   
 		 /**
-			 * \brief    le nombre maximale d'appel de la fonction objectif
+			 * \brief    le nombre maximal d'appel de la fonction objectif
 		 */
 		 const  int   _max_evolution_steps  ;     
 		 /**
@@ -69,7 +69,7 @@ namespace simulatedAnnealing {
 		 * \param   max_independent_runs         le nombre maximale d'exécution indépendante  de l'algorithme
 		 * \param   max_evolution_steps          le nombre maximale d'appel de la fonction objectif
 		 * \param   temperature                  la temperature initiale  
-		 * \param   coef_decrois                  le coefficient de décroissement pour chaque iteration
+		 * \param   coef_decrois                 le coefficient de décroissement pour chaque iteration
 		 *
 		 */
 		SetUpParams(int   max_independent_runs, int   max_evolution_steps,double temperature,double coef_decrois);
@@ -131,20 +131,20 @@ namespace simulatedAnnealing {
 		void setup_temperature();
 
 		/**
-		* \brief      réinitialiser la temperature initialle par temp
-		* \param      temp \e int la nouvelle valeur du _initial_temperature
+		* \brief      réinitialiser la temperature initiale par temp
+		* \param      temp \e int la nouvelle valeure du _initial_temperature
 		*/
 		void set_initial_temperature(double temp);
 
 		/**
 		* \brief      réinitialiser _nb_evolution_steps par x 
-		* \param      x \e int la nouvelle valeur du compteur _nb_evolution_steps
+		* \param      x \e int la nouvelle valeure du compteur _nb_evolution_steps
 		*/
 		void set_nb_evolution_steps(int x);
 
 		/**
 		* \brief      réinitialiser _nb_independent_runs par x
-		* \param      x \e int la nouvelle valeur du compteur _nb_independent_runs
+		* \param      x \e int la nouvelle valeure du compteur _nb_independent_runs
 		*/
 		void set_nb_independent_runs(int x);
 

@@ -42,7 +42,7 @@ namespace simulatedAnnealing {
 		Solution _current_solution;
 
 		/**
-		* \brief	la meilleur solution tirer pendant l'exécution de l'algorithme  SA
+		* \brief	la meilleure solution tirer pendant l'exécution de l'algorithme  SA
 		*/
 		Solution _best_solution;
 
@@ -70,19 +70,19 @@ namespace simulatedAnnealing {
 		const SetUpParams& get_setup() const;
 
 		/**
-		* \brief	renvoie une référence vers _best_solution qui contient la meilleur solution trouvé 
-		* \return   Un \e Solution représentant une référence vers  _best_solution
+		* \brief	renvoie une référence vers _best_solution qui contient la meilleure solution trouvé 
+		* \return   Une \e Solution représentant une référence vers  _best_solution
 		*/
 		const Solution& get_best_solution() const;
 
 		/**
-		* \brief	renvoie une référence vers _current_solution qui contient la solution  courante
-		* \return   Un \e Solution représentant une référence vers  _current_solution
+		* \brief	renvoie une référence vers _current_solution qui contient la solution courante
+		* \return   Une \e Solution représentant une référence vers  _current_solution
 		*/
 		const Solution& get_current_solution() const;
 
 		/**
-		* \brief	renvoie une référence vers _problem qui contient le problem à optimiser
+		* \brief	renvoie une référence vers _problem qui contient le probleme à optimiser
 		* \return   Un \e Problem représentant une référence vers  _problem
 		*/
 		const Problem& get_problem() const;
@@ -98,7 +98,7 @@ namespace simulatedAnnealing {
 		void solve();
 
 		/**
-		* \brief  mis à jour la solution courante et la meilleure solution en fonction de la loi de metropolis
+		* \brief  met à jour la solution courante et la meilleure solution en fonction de la loi de Metropolis
 		*/
 		void updateSolution(Solution* sol);
 		
