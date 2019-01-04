@@ -85,21 +85,22 @@ namespace simulatedAnnealing {
 
 	{
 		
-		Solution* sol = new Solution{ _best_solution };
+		Solution* sol;
 
 		while (_setup.is_less_max_evolution_steps())
 		{
 			if (_setup.get_current_temperature() < 0) break;
 
-			updateSolution(sol);
-		
-			delete sol;
-
 			sol = _problem.random_solution(_current_solution);
 
 			sol->fitness();
 
+			updateSolution(sol);
+		
+			delete sol;	
+
 			_setup.update_temperature();
+
 			_setup.increment_nb_evolution_steps();
 
 		}

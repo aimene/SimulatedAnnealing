@@ -16,7 +16,7 @@ int main()
 
 	
 	simulatedAnnealing::SetUpParams setup{30,20000,1000000,0.999999};
-	simulatedAnnealing::Problem problem{2};
+	simulatedAnnealing::Problem problem{1};
 	simulatedAnnealing::MyAlgorithm myalgo{ problem,setup };
 
 
